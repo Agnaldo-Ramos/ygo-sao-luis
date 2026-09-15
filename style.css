@@ -1,0 +1,2397 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oxanium:wght@400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: rgb(0, 0, 60);
+    color: #222222;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+
+header {
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background-color: rgb(97, 2, 2);
+    color: white;
+    padding: 20px 60px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 120px;
+    height: auto;
+    display: block;
+}
+
+nav a:hover {
+    color: gray;
+}
+
+main h2 {
+    font-family: "Oxanium", sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+main h3 {
+    font-family: "Oxanium", sans-serif;
+    font-weight: 600;
+}
+
+
+/* Configurações do banner / carrossel */
+
+#banner {
+    position: relative;
+    width: 100%;
+    min-height: 450px;
+    overflow: hidden;
+    background-color: rgb(0, 0, 60);
+}
+
+.slides {
+    position: relative;
+    width: 100%;
+    min-height: 450px;
+}
+
+.slide {
+    display: none;
+    position: relative;
+    width: 100%;
+    min-height: 450px;
+}
+
+.slide.ativo {
+    display: block;
+}
+
+.slide img {
+    width: 100%;
+    height: 450px;
+    display: block;
+    object-fit: cover;
+}
+
+.slide-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 70px;
+     background: linear-gradient(
+        90deg,
+        rgba(5, 8, 25, 0.88) 0%,
+        rgba(5, 8, 25, 0.60) 38%,
+        rgba(5, 8, 25, 0.15) 65%,
+        rgba(5, 8, 25, 0) 100%
+    );
+}
+
+.banner-conteudo {
+    max-width: 520px;
+    color: white;
+}
+
+.banner-conteudo h2 {
+    margin: 0 0 12px;
+    font-family: "Oxanium", sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+
+    text-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.banner-conteudo p {
+    margin: 0 0 22px;
+    max-width: 460px;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #eeeeee;
+
+    text-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.banner-conteudo a {
+    display: inline-block;
+    padding: 11px 22px;
+    font-family: "Oxanium", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: white;
+    text-decoration: none;
+    background-color: #111c6b;
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 6px;
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease;
+}
+
+.banner-conteudo a:hover {
+   transform: translateY(-2px);
+   background-color: #18278f;
+}
+
+.banner-conteudo a:hover {
+    background-color: gray;
+}
+
+.slider-seta {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 58px;
+    border: none;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.45);
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.slider-seta:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.slider-anterior {
+    left: 18px;
+}
+
+.slider-proximo {
+    right: 18px;
+}
+
+.controles-slider {
+    position: absolute;
+    z-index: 6;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.botao-slide {
+    width: 12px;
+    height: 12px;
+    padding: 0;
+    border: 2px solid white;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+}
+
+.botao-slide.ativo {
+    background-color: white;
+}
+
+#torneios {
+    padding: 60px 40px;
+    background-color: rgb(74, 0, 0);
+    color: white;
+}
+
+#torneios h2 {
+    text-align: center;
+    margin-bottom: 32px;
+    font-size: 40px;
+}
+
+.lista-torneios {
+    display: flex;
+    max-width: 800px;
+    margin: 0 auto;
+    gap: 25px;
+}
+
+.card-torneio {
+    background-color: black;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    flex: 1;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-torneio h3 {
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.card-torneio p {
+    margin-bottom: 8px;
+}
+
+.card-torneio a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 18px;
+    background-color: #ffffff;
+    color: #111111;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.card-torneio a:hover {
+    background-color: gray;
+}
+
+.card-torneio:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+#noticias {
+    padding: 60px 40px;
+    background-color: rgb(0, 0, 60);
+    color: white;
+}
+
+#noticias h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 32px;
+}
+
+.lista-noticias {
+    display: flex;
+    max-width: 800px;
+    margin: 0 auto;
+    gap: 25px;
+}
+
+.card-noticia {
+    background-color: black;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    flex: 1;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-noticia h3 {
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.card-noticia p {
+    margin-bottom: 8px;
+}
+
+.card-noticia a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 18px;
+    background-color: #ffffff;
+    color: #111111;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.card-noticia a:hover {
+    background-color: gray;
+}
+
+.card-noticia:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+#ranking {
+    padding: 60px 40px;
+    background-color: rgb(74, 0, 0);
+    color: white;
+}
+
+#ranking h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 32px;
+}
+
+.aviso-dados {
+    max-width: 750px;
+
+    margin: 25px auto 0;
+    padding: 12px 18px;
+
+    background-color: rgba(255, 255, 255, 0.08);
+
+    border-left: 4px solid #8b0000;
+    border-radius: 5px;
+
+    color: #dddddd;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    text-align: left;
+}
+
+table th {
+    font-family: "Oxanium", sans-serif;
+    font-weight: 600;
+}
+
+table td {
+    font-family: "Inter", sans-serif;
+}
+
+.tabela-ranking {
+    max-width: 800px;
+    margin: 0 auto;
+    overflow-x: auto;
+}
+
+.tabela-ranking table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: black;
+    color: white;
+}
+
+.tabela-ranking th {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+.tabela-ranking td {
+    padding: 15px;
+    border-bottom: 1px solid #444;
+}
+
+.tabela-ranking tbody tr:hover {
+    background-color: #333;
+}
+
+#ranking a {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #ffffff;
+    color: #111111;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-left: 600px;
+    margin-top: 30px;
+}
+    
+
+#ranking a:hover {
+    background-color: gray;
+}
+
+.tabela-ranking .top-1 {
+    background-color: gold;
+    color: black;
+}
+
+.tabela-ranking .top-2 {
+    background-color: silver;
+    color: black;
+}
+
+.tabela-ranking .top-3 {
+    background-color: #cd7f32; /* Bronze */
+    color: black;
+}
+
+#Decks {
+    padding: 60px 40px;
+    background-color: rgb(0, 0, 60);
+    color: white;
+}
+
+#Decks h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 32px;
+}
+
+.lista-decks {
+    display: grid;
+    grid-template-columns: repeat (4, 1fr);
+    max-width: 800px;
+    margin: 0 auto;
+    gap: 25px;
+}
+
+.card-deck {
+    background-color: black;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    flex: 1;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-deck:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card-deck h3 {
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.card-deck p {
+    margin-bottom: 8px;
+}
+
+.card-deck a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 18px;
+    background-color: #ffffff;
+    color: #111111;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.card-deck a:hover {
+    background-color: gray;
+}
+
+footer {
+    background-color: rgb(97, 2, 2);
+    color: white;
+    text-align: justify;
+    padding: 25px 40px 20px;
+}
+
+.footer-conteudo {
+    display: flex;
+    justify-content:space-between;
+    gap: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-conteudo h2 {
+    margin-bottom: 15px;
+    font-size: 20px
+}
+
+.footer-conteudo p {
+    color: white;
+    max-width: 350px;
+}
+
+.footer-navegacao ul {
+    list-style: none;
+}
+
+.footer-navegacao a {
+    color: white;
+    text-decoration: underline;
+}
+
+.footer-navegacao a:hover{
+    color: gray;
+}
+
+.footer-direitos {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding-top: 15px;
+    border-top: 1px solid white;
+    text-align: center;
+}
+
+.footer-direitos p {
+    color: white;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    
+    header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    #banner,
+    .slides,
+    .slide {
+        min-height: 360px;
+    }
+
+    .slide img {
+        height: 360px;
+    }
+
+    .slide-overlay {
+        align-items: flex-end;
+        padding: 30px 25px;
+
+        background: linear-gradient(
+        0deg,
+        rgba(5, 8, 25, 0.92) 0%,
+        rgba(5, 8, 25, 0.60) 55%,
+        rgba(5, 8, 25, 0.10) 100%
+    );
+    }
+
+    .banner-conteudo {
+        max-width: 100%;
+    }
+
+    .banner-conteudo h2 {
+        font-size: 27px;
+    }
+
+    .banner-conteudo p {
+        font-size: 14px;
+        line-height: 1.4;
+        margin-bottom: 15px;
+    }
+
+    .banner-conteudo a {
+    padding: 9px 16px;
+    font-size: 13px;
+    }
+
+    .slider-seta {
+        width: 38px;
+        height: 48px;
+        font-size: 24px;
+    }
+
+    .slider-anterior {
+        left: 8px;
+    }
+
+    .slider-proximo {
+        right: 8px;
+    }
+
+    .lista-torneios {
+        flex-direction: column;
+    }
+
+    .lista-noticias {
+        flex-direction: column;
+    }
+
+    .lista-decks {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-conteudo {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    #pagina-torneios {
+        padding: 40px 20px;
+    }
+
+    #pagina-torneios h2 {
+        font-size: 30px;
+    }
+
+    .filtros-torneios {
+        flex-direction: column;
+    }
+
+    .lista-torneios-pagina {
+        grid-template-columns: 1fr;
+    }
+
+    .cabecalho-detalhes {
+        padding: 45px 20px;
+    }
+
+    .cabecalho-detalhes h2 {
+        font-size: 30px;
+    }
+
+    .cabecalho-detalhes p {
+        font-size: 16px;
+    }
+
+
+    .informacoes-torneio {
+        margin: -20px 20px 40px;
+        grid-template-columns: 1fr 1fr;
+        padding: 20px;
+    }
+
+
+    .resultado-torneio {
+        padding: 0 20px;
+    }
+
+
+    .tabela-container {
+        overflow-x: auto;
+    }
+
+
+    .tabela-container table {
+        min-width: 700px;
+    }
+
+
+    .lista-decklists {
+        grid-template-columns: 1fr;
+    }
+
+
+    .decklists-torneio {
+        padding: 0 20px;
+    }
+
+    #pagina-ranking {
+        padding: 45px 20px;
+    }
+
+    #pagina-ranking h2 {
+        font-size: 30px;
+    }
+
+    #pagina-ranking .descricao-pagina {
+        font-size: 16px;
+    }
+
+
+    .filtros-ranking {
+        margin: -20px 20px 40px;
+        padding: 20px;
+    }
+
+
+    .filtros-ranking .filtro {
+        width: 100%;
+    }
+
+
+    .ranking {
+        padding: 0 20px;
+    }
+
+
+    .ranking h2 {
+        font-size: 26px;
+    }
+
+
+    .tabela-ranking {
+        overflow-x: auto;
+    }
+
+
+    .tabela-ranking table {
+        min-width: 700px;
+    }
+
+        #pagina-jogadores {
+        padding: 45px 20px;
+    }
+
+    #pagina-jogadores h2 {
+        font-size: 30px;
+    }
+
+    #pagina-jogadores .descricao-pagina {
+        font-size: 16px;
+    }
+
+
+    .busca-jogadores {
+        margin: -20px 20px 40px;
+        padding: 20px;
+    }
+
+
+    .lista-jogadores {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+
+     /* PERFIL DO JOGADOR */
+
+    .perfil-jogador {
+        padding: 45px 20px;
+    }
+
+    .cabecalho-perfil h2 {
+        font-size: 32px;
+    }
+
+    .cabecalho-perfil p {
+        font-size: 16px;
+    }
+
+
+    .estatisticas-jogador {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: -20px;
+    }
+
+
+    .estatistica .numero {
+        font-size: 26px;
+    }
+
+
+    .item-historico {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+
+    .posicao {
+        font-size: 16px;
+    }
+
+    .cabecalho-deck h2 {
+        font-size: 30px;
+    }
+
+
+    .estatisticas-deck {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .lista-jogadores-deck {
+        grid-template-columns: 1fr;
+    }
+
+
+    .jogadores-do-deck h2 {
+        font-size: 25px;
+    }
+
+    /* NOTÍCIAS */
+
+#pagina-noticias {
+    padding: 45px 20px;
+}
+
+#pagina-noticias h2 {
+    font-size: 30px;
+}
+
+#pagina-noticias .descricao-pagina {
+    font-size: 16px;
+}
+
+.busca-noticias {
+    margin: -20px 20px 40px;
+
+    padding: 20px;
+}
+
+.lista-noticias-pagina {
+    grid-template-columns: 1fr;
+
+    padding: 0 20px;
+}
+
+.card-noticia-pagina {
+    padding: 20px;
+}
+
+/* NOTÍCIA INDIVIDUAL */
+
+.noticia-individual {
+    margin: 30px 20px 50px;
+
+    padding: 25px;
+}
+
+.noticia-individual h2 {
+    font-size: 30px;
+}
+
+.conteudo-noticia {
+    font-size: 16px;
+}
+
+#pagina-sobre {
+    padding: 45px 20px;
+}
+
+#pagina-sobre h2 {
+    font-size: 30px;
+}
+
+.bloco-sobre {
+    padding: 22px;
+}
+
+}
+
+@media (max-width: 480px) {
+
+    .estatisticas-deck {
+        grid-template-columns: 1fr;
+    }
+
+
+
+ .item-historico-deck {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+
+    .historico-deck h2 {
+        font-size: 25px;
+    }
+}
+
+/*TORNEIOS*/
+/* Banner da página torneios */
+#pagina-torneios {
+    padding: 60px 40px;
+    background-color: rgb(0, 0, 60)
+}
+
+#pagina-torneios h2 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.descricao-pagina {
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+}
+
+/*Parte central da página torneios*/
+
+#filtro-torneio {
+    background-color: rgb(0, 0, 60);
+}
+
+
+.filtros-torneios {
+    max-width: 1000px;
+    margin: 0 auto 40px;
+    display:flex;
+    gap: 20px;
+    background-color:black;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    color: white;
+}
+
+.filtro {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filtro label {
+    font-weight: bold;
+}
+
+.filtro input, 
+.filtro select {
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.lista-torneio-pagina {
+    max-width: 1200px;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card-torneio-pagina {
+    background-color: #111111;
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-torneio-pagina:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card-torneio-pagina h3 {
+    font-size: 21px;
+    margin-bottom: 15px;
+}
+
+.card-torneio-pagina p {
+    margin-bottom: 8px;
+}
+
+.card-torneio-pagina a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 18px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.card-torneio-pagina a:hover {
+    background-color: gray;
+}
+
+/*Estilo da página Torneio*/
+
+
+.detalhes-torneio {
+    background-color: rgb(0, 0, 60);
+    color: white;
+    padding-bottom: 60px;
+}
+
+.cabecalho-detalhes {
+    background-color: rgb(0, 0, 60);
+    color: white;
+
+    text-align: center;
+
+    padding: 60px 40px;
+}
+
+.cabecalho-detalhes h2 {
+    font-size: 40px;
+    margin: 10px 0 15px;
+}
+
+.cabecalho-detalhes p {
+    color: white;
+    font-size: 18px;
+}
+
+.tipo-torneio {
+    display: inline-block;
+
+    padding: 6px 14px;
+
+    background-color: white;
+    color: black;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.informacoes-torneio {
+    max-width: 1100px;
+
+    margin: -30px auto 50px;
+
+    background-color: #ffffff;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 20px;
+
+    position: relative;
+}
+
+.informacoes {
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.informacoes strong {
+    font-size: 14px;
+
+    color: rgb(97, 2, 2);
+
+    text-transform: uppercase;
+}
+
+.informacoes span {
+    font-size: 17px;
+
+    font-weight: bold;
+
+    color: #111111;
+}
+
+.resultado-torneio {
+    max-width: 1100px;
+    background-color: rgb(0, 0, 60);
+    margin: 0 auto 60px;
+    color: white;
+    padding: 0 20px;
+}
+
+.resultado-torneio h2 {
+    font-size: 30px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.tabela-container {
+    overflow-x: auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.tabela-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-container th {
+    background-color: black;
+    color: #ffffff;
+    padding: 15px;
+    text-align: left;
+}
+
+.tabela-container td {
+    padding: 15px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.tabela-container tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+.decklists-torneio {
+    max-width: 1100px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+}
+
+.decklists-torneio h2 {
+    font-size: 30px;
+    color: white;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.lista-decklists {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card-decklist {
+    background-color: black;
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease box-shadow 0.2s ease;
+}
+
+.card-decklist:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-decklist h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.card-decklist p {
+    color: white;
+    margin-bottom: 15px;
+}
+
+.card-decklist a {
+    display: inline-block;
+    padding: 10px 18px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.card-decklist a:hover {
+    background-color: gray;
+}
+
+/* Página Ranking */
+#pagina-ranking {
+    background-color: rgb(0, 0, 60);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+#pagina-ranking h2 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+
+.filtros-ranking {
+    max-width: 1100px;
+    margin: -25px auto 50px;
+    background-color: black;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+    display: flex;
+    justify-content: center;
+}
+
+.filtros-ranking .filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 250px;
+}
+
+.filtros-ranking label {
+    font-weight: bold;
+    color: white;
+}
+
+.filtros-ranking select {
+    padding: 12px;
+    border: 1px solid white;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: black;
+    color: white;
+}
+
+.ranking {
+    max-width: 1100px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+}
+
+.ranking h2 {
+    color: white;
+    font-size: 30px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.tabela-ranking-2 {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+    overflow-x: auto;
+}
+
+.tabela-ranking-2 table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+}
+
+.tabela-ranking-2 th {
+    background-color: #111111;
+    color: white;
+    padding: 16px;
+    text-align: left;
+    font-size: 15px;
+}
+
+.tabela-ranking-2 td {
+    padding: 16px;
+    border-bottom: 1px solid #eeeeee;
+    background-color: black;
+    color: white;
+}
+
+.tabela-ranking-2 tbody tr:hover {
+    background-color: gray;
+    transition: background-color 0.2s ease;
+}
+
+.tabela-ranking-2 tbody tr:first-child {
+    font-weight: bold;
+}
+
+.tabela-ranking-2 tbody td:first-child {
+    font-weight: bold;
+}
+
+/*///////////
+PÁGINA JOGADORES
+////////////*/
+
+#pagina-jogadores {
+    background-color: rgb(0, 0, 60);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+#pagina-jogadores h2 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+#pagina-jogadores .descricao-pagina {
+    font-size: 18px;
+    color: #dddddd;
+}
+
+.busca-jogadores {
+    max-width: 700px;
+    margin: -25px auto 50px;
+    background-color: black;
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  
+}
+
+.busca-jogadores label {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;  
+}
+
+.busca-jogadores input {
+    padding: 13px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+}
+
+.busca-jogadores input:focus {
+    border-color: green;
+}
+
+.lista-jogadores {
+    max-width: 1100px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card-jogador {
+    background-color: black;
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-jogador:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px gray;
+}
+
+.card-jogador h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.card-jogador p {
+    margin-bottom: 5px;
+}
+
+.card-jogador a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 18px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.card-jogador a:hover {
+    background-color: gray;
+}
+
+/* //////////
+PAGINA DO JOGADOR X
+////////////  */
+
+.perfil-jogador {
+    background-color: #111c6b;
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.cabecalho-perfil h2 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.cabecalho-perfil p {
+    font-size: 18px;
+    color: #dddddd;
+}
+
+.estatisticas-jogador {
+    max-width: 1100px;
+    margin: -25px auto 50px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.estatistica {
+    background-color: white;
+    padding: 25px 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.estatistica .numero {
+    font-size: 32px;
+    font-weight: bold;
+    color: #111c6b;
+}
+
+.titulo-estatistica {
+    color: #555555;
+    font-size: 15px;
+}
+
+.deck-principal {
+    max-width: 1100px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+}
+
+.deck-principal h2 {
+    color: white;
+    font-size: 30px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.card-deck-principal {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+.card-deck-principal h3 {
+    color: #111c6b;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card-deck-principal p {
+    color: #555555;
+    margin-bottom: 20px;
+}
+
+.card-deck-principal a {
+    display: inline-block;
+    background-color: #111c6b;
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.card-deck-principal a:hover {
+    background-color: gray;
+}
+
+.historico-torneios h2 {
+    color: white;
+    font-size: 30px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.historico-jogador {
+    max-width: 1100px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+}
+
+.historico-jogador h2 {
+    color: white;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+.lista-historico {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;;
+}
+
+
+.item-historico {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-historico:hover {
+    background-color: #f5f5f5;
+}
+
+.item-historico h3 {
+    color: #111c6b;
+    margin-bottom: 5px;
+}
+
+.item-historico p {
+    color: #555555;
+}
+
+.posicao {
+    font-weight: bold;
+    color: #111c6b;
+    font-size: 18px;
+}
+
+/* ========================================
+   PÁGINA DE DECKS
+======================================== */
+
+#pagina-decks {
+    text-align: center;
+    padding: 50px 20px 30px;
+}
+
+#pagina-decks h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+#pagina-decks .descricao-pagina {
+    max-width: 700px;
+    margin: 0 auto;
+    color: #dddddd;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   BUSCA DE DECKS
+======================================== */
+
+.busca-decks {
+    max-width: 1100px;
+    margin: 0 auto 35px;
+    padding: 0 20px;
+}
+
+.busca-decks label {
+    display: block;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.busca-decks input {
+    width: 100%;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.busca-decks input:focus {
+    outline: 2px solid white;
+}
+
+
+/* ========================================
+   LISTA DE DECKS
+======================================== */
+
+.lista-decks-pagina {
+    max-width: 1100px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 25px;
+}
+
+
+/* ========================================
+   CARD DO DECK
+======================================== */
+
+.card-deck-pagina {
+    background-color: #111111;
+    color: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.3);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+
+.card-deck-pagina:hover {
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(0, 0, 0, 0.4);
+
+}
+
+
+.card-deck-pagina h3 {
+
+    font-size: 26px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.card-deck-pagina p {
+
+    margin-bottom: 10px;
+
+    color: #dddddd;
+
+}
+
+
+.card-deck-pagina strong {
+
+    color: white;
+
+}
+
+
+/* ========================================
+   BOTÃO VER DETALHES
+======================================== */
+
+.card-deck-pagina a {
+
+    display: inline-block;
+
+    margin-top: 15px;
+
+    padding: 10px 18px;
+
+    background-color: #111c6b;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 6px;
+
+    transition:
+        background-color 0.2s,
+        transform 0.2s;
+
+}
+
+
+.card-deck-pagina a:hover {
+
+    background-color: #18288f;
+
+    transform:
+        translateY(-2px);
+
+}
+
+/* ========================================
+   PÁGINA INDIVIDUAL DO DECK
+======================================== */
+
+.perfil-deck {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+
+/* CABEÇALHO DO DECK */
+
+.cabecalho-deck {
+    background-color: white;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.15);
+
+    margin-bottom: 30px;
+}
+
+
+.cabecalho-deck h2 {
+    color: #111c6b;
+
+    font-size: 36px;
+
+    margin-bottom: 10px;
+}
+
+
+.cabecalho-deck p {
+    color: #555555;
+
+    font-size: 17px;
+
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   ESTATÍSTICAS DO DECK
+======================================== */
+
+.estatisticas-deck {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+
+.estatistica-deck {
+    background-color: white;
+
+    padding: 25px 15px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+.numero-estatistica {
+    display: block;
+
+    color: #111c6b;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+
+.estatistica-deck span:last-child {
+    color: #555555;
+
+    font-weight: bold;
+}
+
+
+/* ========================================
+   JOGADORES DO DECK
+======================================== */
+
+.jogadores-do-deck {
+    max-width: 1100px;
+
+    margin: 0 auto 60px;
+
+    padding: 0 20px;
+}
+
+
+.jogadores-do-deck h2 {
+    color: white;
+
+    font-size: 30px;
+
+    margin-bottom: 25px;
+}
+
+
+.lista-jogadores-deck {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+
+/* CARD DO JOGADOR */
+
+.card-jogador-deck {
+    background-color: white;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.12);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+
+.card-jogador-deck:hover {
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(0, 0, 0, 0.18);
+}
+
+
+.card-jogador-deck h3 {
+    color: #111c6b;
+
+    margin: 0;
+
+    font-size: 20px;
+}
+
+.card-jogador-deck a {
+    display: inline-block;
+
+    margin-top: 12px;
+
+    padding: 8px 14px;
+
+    background-color: #111c6b;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 6px;
+
+    transition:
+        background-color 0.2s,
+        transform 0.2s;
+}
+
+
+.card-jogador-deck a:hover {
+    background-color: #18288f;
+
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   HISTÓRICO DO DECK
+======================================== */
+
+.historico-deck {
+    max-width: 1100px;
+
+    margin: 0 auto 60px;
+
+    padding: 0 20px;
+}
+
+
+.historico-deck h2 {
+    color: white;
+
+    font-size: 30px;
+
+    margin-bottom: 25px;
+}
+
+
+.lista-historico-deck {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+.item-historico-deck {
+    background-color: white;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.12);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+
+.item-historico-deck:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(0, 0, 0, 0.18);
+}
+
+
+.dados-historico-deck h3 {
+    color: #111c6b;
+
+    margin-bottom: 10px;
+}
+
+
+.dados-historico-deck p {
+    color: #555555;
+
+    margin-bottom: 5px;
+}
+
+
+.resultado-historico-deck {
+    display: flex;
+
+    gap: 10px;
+}
+
+
+.resultado-historico-deck span {
+    background-color: #111c6b;
+
+    color: white;
+
+    padding: 8px 12px;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+}
+
+.dados-historico-deck h3 a {
+    color: #111c6b;
+    text-decoration: none;
+}
+
+.dados-historico-deck h3 a:hover {
+    text-decoration: underline;
+}
+
+.tabela-container td {
+    color: #111111;
+    padding: 15px;
+    border-bottom: 1px solid #dddddd;
+}
+
+.tabela-container td a {
+    color: #111c6b;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.tabela-container td a:hover {
+    text-decoration: underline;
+}
+
+/* ========================================
+   PÁGINA DE NOTÍCIAS
+======================================== */
+
+#pagina-noticias {
+    background-color: #111c6b;
+    color: white;
+
+    text-align: center;
+
+    padding: 60px 20px;
+}
+
+#pagina-noticias h2 {
+    font-size: 40px;
+
+    margin-bottom: 15px;
+}
+
+#pagina-noticias .descricao-pagina {
+    color: #dddddd;
+
+    font-size: 18px;
+
+    max-width: 700px;
+
+    margin: 0 auto;
+
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   BUSCA DE NOTÍCIAS
+======================================== */
+
+.busca-noticias {
+    max-width: 800px;
+
+    margin: -25px auto 50px;
+
+    padding: 25px;
+
+    background-color: white;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0, 0, 0, 0.10);
+}
+
+.busca-noticias label {
+    display: block;
+
+    color: #333333;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+.busca-noticias input {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #cccccc;
+
+    border-radius: 6px;
+
+    font-size: 16px;
+
+    box-sizing: border-box;
+}
+
+.busca-noticias input:focus {
+    outline: none;
+
+    border-color: #111c6b;
+}
+
+
+/* ========================================
+   LISTA DE NOTÍCIAS
+======================================== */
+
+.lista-noticias-pagina {
+    max-width: 1100px;
+
+    margin: 0 auto 60px;
+
+    padding: 0 20px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+/* ========================================
+   CARD DE NOTÍCIA
+======================================== */
+
+.card-noticia-pagina {
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.10);
+
+    display: flex;
+
+    flex-direction: column;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.card-noticia-pagina:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+/* DATA */
+
+.data-noticia {
+    color: #777777;
+
+    font-size: 14px;
+
+    margin-bottom: 12px;
+}
+
+
+/* TÍTULO */
+
+.card-noticia-pagina h3 {
+    color: #111c6b;
+
+    font-size: 22px;
+
+    margin-bottom: 15px;
+
+    line-height: 1.3;
+}
+
+
+/* TEXTO */
+
+.card-noticia-pagina p {
+    color: #555555;
+
+    line-height: 1.6;
+
+    margin-bottom: 20px;
+}
+
+
+/* BOTÃO */
+
+.card-noticia-pagina a {
+    display: inline-block;
+
+    margin-top: auto;
+
+    align-self: flex-start;
+
+    padding: 10px 18px;
+
+    background-color: #111c6b;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.card-noticia-pagina a:hover {
+    background-color: #18288f;
+
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   PÁGINA INDIVIDUAL DA NOTÍCIA
+======================================== */
+
+.noticia-individual {
+    max-width: 900px;
+
+    margin: 50px auto 70px;
+
+    padding: 35px;
+
+    background-color: white;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+/* DATA */
+
+.data-noticia-individual {
+    display: block;
+
+    color: #777777;
+
+    font-size: 14px;
+
+    margin-bottom: 15px;
+}
+
+
+/* TÍTULO */
+
+.noticia-individual h2 {
+    color: #111c6b;
+
+    font-size: 38px;
+
+    line-height: 1.2;
+
+    margin-bottom: 25px;
+}
+
+
+/* CONTEÚDO */
+
+.conteudo-noticia {
+    color: #333333;
+
+    font-size: 18px;
+
+    line-height: 1.8;
+
+    white-space: pre-line;
+}
+
+/* ========================================
+   SOBRE O PROJETO
+======================================== */
+
+#pagina-sobre {
+    background-color: #111c6b;
+    color: white;
+
+    text-align: center;
+
+    padding: 60px 20px;
+}
+
+#pagina-sobre h2 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+#pagina-sobre .descricao-pagina {
+    color: #dddddd;
+    font-size: 18px;
+}
+
+
+.sobre-projeto {
+    max-width: 1000px;
+
+    margin: 50px auto 70px;
+
+    padding: 0 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 25px;
+}
+
+
+.bloco-sobre {
+    background-color: white;
+
+    padding: 30px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.10);
+}
+
+
+.bloco-sobre h2 {
+    color: #111c6b;
+
+    margin-bottom: 15px;
+}
+
+
+.bloco-sobre p {
+    color: #555555;
+
+    line-height: 1.7;
+
+    margin-bottom: 10px;
+}
+
+/* ========================================
+   TIPOGRAFIA
+======================================== */
+
+h1,
+h2,
+h3,
+nav a,
+button,
+.btn,
+.botao,
+.botao-slide,
+select,
+label {
+    font-family: "Oxanium", sans-serif;
+}
+
+/* ========================================
+   BANNER CLICÁVEL
+======================================== */
+
+.slide[data-link] {
+    cursor: pointer;
+}

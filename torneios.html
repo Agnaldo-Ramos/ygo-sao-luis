@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+    <html lang="pt-br">
+
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+            <title>Torneios - Yu-Gi-Oh! São Luís</title>
+
+            <link rel="stylesheet" href="css/style.css">
+        </head>
+
+        <body>
+
+            <header>
+                <div class="logo">
+                    <a href="index.html">
+                        <img
+                            src="imgYGO/logo-ygo-slz.png"
+                            alt="YGO São Luís do Maranhão">
+                    </a>
+                </div>
+
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="torneios.html">Torneios</a></li>
+                        <li><a href="ranking.html">Ranking</a></li>
+                        <li><a href="jogadores.html">Jogadores</a></li>
+                        <li><a href="decks.html">Decks</a></li>
+                        <li><a href="noticias.html">Notícias</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                    </ul>
+                </nav>
+
+            </header>
+
+            <main>
+                <section id="pagina-torneios">
+                        <h2> Bem-vindo ao Yu-Gi-Oh! São Luís</h2>
+                            <p class="descricao-pagina">
+                            Confira as informações dos próximos torneios
+                            e eventos de São Luís, Maranhão.
+                            </p>
+
+                </section>
+
+                <section id="filtro-torneio">
+                <div class="filtros-torneios">
+                    <div class="filtro">
+
+                        <label for="busca">
+                            Buscar Torneio
+                        </label>
+
+                        <input
+                        type="text"
+                        id="busca"
+                        placeholder="Nome do torneio...">
+                    </div>
+
+                    <div class="filtro">
+
+                        <label for="mes">
+                            Mês
+                        </label>
+
+                        <select id="mes">
+                            <option value="">
+                                Todos
+                            </option>
+
+                            <option value="janeiro">
+                                Janeiro
+                            </option>
+
+                            <option value="fevereiro">
+                                Fevereiro
+                            </option>
+
+                            <option value="marco">
+                                Março
+                            </option>
+
+                            <option value="abril">
+                                Abril
+                            </option>
+
+                            <option value="maio">
+                                Maio
+                            </option>
+
+                            <option value="junho">
+                                Junho
+                            </option>
+
+                            <option value="julho">
+                                Julho
+                            </option>
+
+                            <option value="agosto">
+                                Agosto
+                            </option>
+
+                            <option value="setembro">
+                                Setembro
+                            </option>
+
+                            <option value="outubro">
+                                Outubro
+                            </option>
+
+                            <option value="novembro">
+                                Novembro
+                            </option>
+
+                            <option value="dezembro">
+                                Dezembro
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="filtro">
+
+                        <label for="ano">
+                            Ano
+                        </label>
+
+                        <select id="ano">
+                            <option value="">
+                                Todos
+                            </option>
+                            
+                            <option value="2026">
+                                2026
+                            </option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="lista-torneios-pagina">
+                    <article class="card-torneio-pagina"
+                             data-mes="agosto"
+                             data-ano="2026">
+                            <h3>OTS Championship</h3>
+                                <p><strong>Data:</strong> 20/08/2026.</p>
+                                <p><strong>Horário:</strong> 16:00</p>
+                                <p><strong>Local:</strong> Nexus Card Game.</p>
+                                <p><strong>Formato:</strong> Tradicional.</p>
+                                <a href="torneio.html?id=ots-championship">
+                                    Ver detalhes
+                                </a>
+                        </article>
+
+                        <article class="card-torneio-pagina"
+                                 data-mes="agosto"
+                                 data-ano="2026">
+                             <h3>Weekly Tournament</h3>
+                                <p><strong>Data:</strong> 27/08/2026</p>
+                                <p><strong>Horário:</strong> 15:00</p>
+                                <p><strong>Local:</strong> Guilda98</p>
+                                <p><strong>Formato:</strong> Tradicional</p>
+                                <a href="torneio.html?id=weekly-tournament">
+                                    Ver detalhes
+                                </a>
+                        </article>
+                                
+                        <article class="card-torneio-pagina"
+                                 data-mes="agosto"
+                                 data-ano="2026">
+                            <h3>Evento Championship</h3>
+                                <p><strong>Data:</strong> 31/08/2026</p>
+                                <p><strong>Horário:</strong> 14:00</p>
+                                <p><strong>Local:</strong> Nexus Card Game</p>
+                                <p><strong>Formato:</strong> Tradicional</p>
+                                <a href="torneio.html?id=evento-championship">
+                                    Ver detalhes
+                                </a>
+                    </article>
+                </div>
+            </section>
+            </main>
+
+
+            <footer>
+                <div class="footer-conteudo">
+                    <div class="footer-sobre">
+                        <h2>YGO São Luís</h2>
+                        <p>Sistema de divulgação e estatísticas
+                            dos torneios de Yu-Gi-Oh
+                            de São Luís, Maranhão.
+                        </p>
+                    </div>
+
+                    <div class="footer-navegacao">
+                        <h2>Navegação</h2>
+                        <ul>
+                            <li><a href="index.html">Início</a></li>
+                            <li><a href="torneios.html">Torneios</a></li>
+                            <li><a href="ranking.html">Ranking</a></li>
+                            <li><a href="jogadores.html">Jogadores</a></li>
+                            <li><a href="decks.html">Decks</a></li>
+                            <li><a href="noticias.html">Notícias</a></li>
+                            <li><a href="sobre.html">Sobre</a></li>                      
+                        </ul>
+                    </div>
+
+                    <div class="footer-contato">
+                        <h2>Projeto</h2>
+                        <p>Projeto desenvolvido como atividade
+                            extensionista do curso de ADS.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="footer-direitos">
+                      <p> © São Luís, 2026. Todos os direitos
+                        reservados.
+                      </p>
+                </div>
+            </footer>
+
+            <script src="js/script.js"></script>
+        </body>
+    </html>

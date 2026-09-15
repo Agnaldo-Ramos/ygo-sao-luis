@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+    <html lang="pt-br">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+            <title> Yu-Gi-Oh! São Luís</title>
+
+            <link rel="stylesheet" href="css/style.css">
+        </head>
+        <body>
+
+            <header>
+               <div class="logo">
+                    <a href="index.html">
+                        <img
+                            src="imgYGO/logo-ygo-slz.png"
+                            alt="YGO São Luís do Maranhão">
+                    </a>
+                </div>
+
+
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="torneios.html">Torneios</a></li>
+                        <li><a href="ranking.html">Ranking</a></li>
+                        <li><a href="jogadores.html">Jogadores</a></li>
+                        <li><a href="decks.html">Decks</a></li>
+                        <li><a href="noticias.html">Notícias</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>                      
+                    </ul>
+                </nav>
+
+
+            </header>
+            <main>
+                <section id="banner" class="banner-slider" aria-label="Destaques do YGO São Luís">
+
+                    <div class="slides">
+
+                        <article class="slide ativo" data-link="torneios.html">
+                            <img src="imgYGO/banner-torneios.png" alt="Torneios de Yu-Gi-Oh! em São Luís">
+                            <div class="slide-overlay">
+                                <div class="banner-conteudo">
+                                    <h2>Torneios de Yu-Gi-Oh! em São Luís</h2>
+                                    <p>Acompanhe os próximos eventos, horários e resultados.</p>
+                                    <a href="torneios.html">Ver torneios</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="slide" data-link="ranking.html">
+                            <img src="imgYGO/banner-ranking.png" alt="Ranking dos jogadores de Yu-Gi-Oh! de São Luís">
+                            <div class="slide-overlay">
+                                <div class="banner-conteudo">
+                                    <h2>Ranking da comunidade</h2>
+                                    <p>Veja os jogadores com melhor desempenho nos torneios locais.</p>
+                                    <a href="ranking.html">Ver ranking</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="slide" data-link="decks.html">
+                            <img src="imgYGO/banner-decks.png" alt="Decks e estatísticas do YGO São Luís">
+                            <div class="slide-overlay">
+                                <div class="banner-conteudo">
+                                    <h2>Decks e estatísticas</h2>
+                                    <p>Conheça os decks mais utilizados e seus resultados.</p>
+                                    <a href="decks.html">Ver decks</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="slide" data-link="noticias.html">
+                            <img src="imgYGO/banner-noticias.png" alt="Notícias de Yu-Gi-Oh!">
+                            <div class="slide-overlay">
+                                <div class="banner-conteudo">
+                                    <h2>Notícias do mundo de Yu-Gi-Oh!</h2>
+                                    <p>Acompanhe novidades, lançamentose informações da comunidade.</p>
+                                    <a href="noticias.html">Ver notícias</a>
+                                </div>
+                            </div>
+                        </article>
+
+                    </div>
+
+                    <button class="slider-seta slider-anterior" type="button" aria-label="Slide anterior">&#10094;</button>
+                    <button class="slider-seta slider-proximo" type="button" aria-label="Próximo slide">&#10095;</button>
+
+                    <div class="controles-slider" aria-label="Selecionar destaque">
+                        <button class="botao-slide ativo" type="button" data-slide="0" aria-label="Mostrar slide 1"></button>
+                        <button class="botao-slide" type="button" data-slide="1" aria-label="Mostrar slide 2"></button>
+                        <button class="botao-slide" type="button" data-slide="2" aria-label="Mostrar slide 3"></button>
+                        <button class="botao-slide" type="button" data-slide="3" aria-label="Mostrar slide 4"></button>
+                    </div>
+
+                </section>
+
+                <section id="torneios">
+                    <h2> Próximos Torneios </h2>
+                        <div class="lista-torneios">
+                        <article class="card-torneio">
+                            <h3>OTS Championship</h3>
+                                <p><strong>Data:</strong> 20/08/2026.</p>
+                                <p><strong>Horário:</strong> 16:00</p>
+                                <p><strong>Local:</strong> Nexus Card Game.</p>
+                                <p><strong>Formato:</strong> Tradicional.</p>
+                                <a href="torneios.html">
+                                    Ver detalhes
+                                </a>
+                        </article>
+
+                        <article class="card-torneio">
+                             <h3>Weekly Tournament</h3>
+                                <p><strong>Data:</strong> 27/08/2026</p>
+                                <p><strong>Horário:</strong> 15:00</p>
+                                <p><strong>Local:</strong> Guilda98</p>
+                                <p><strong>Formato:</strong> Tradicional</p>
+                                <a href="torneios.html">
+                                    Ver detalhes
+                                </a>
+                        </article>
+                                
+                        <article class="card-torneio">
+                            <h3>Evento Championship</h3>
+                                <p><strong>Data:</strong> 31/08/2026</p>
+                                <p><strong>Horário:</strong> 14:00</p>
+                                <p><strong>Local:</strong> Nexus Card Game</p>
+                                <p><strong>Formato:</strong> Tradicional</p>
+                                <a href="torneios.html">
+                                    Ver detalhes
+                                </a>
+                       
+                        </article> 
+                        </div>
+                </section>
+
+                <section id="noticias">
+                    <h2> Últimas Notícias</h2>
+                        <div class="lista-noticias">
+                        <article class="card-noticia">
+                            <h3>OTS Championship movimenta a comunidade local</h3>
+                                <p> O OTS Championship realizado em São Luís
+                                    reuniu jogadores da comunidade local em mais
+                                    uma rodada competitiva de Yu-Gi-Oh!
+                                </p>
+                            <a href="noticias.html">
+                                Leia mais
+                            </a>
+                        </article>
+
+                        <article class="card-noticia">
+                            <h3>Ranking de jogadores é atualizado</h3>
+                                <p> O ranking competitivo do YGO São Luís recebeu
+                                    uma nova atualização com base nos resultados
+                                    mais recentes dos torneios locais.
+                                </p>
+                            <a href="noticias.html">
+                                Leia mais
+                            </a>
+                       
+                        </article> 
+                        </div>
+                </section>
+
+                <section id="ranking">
+                    <h2> Top Jogadores</h2>
+                        <div class="tabela-ranking">
+                        <table>
+
+                        <thead>
+                            <tr>
+                                <th>Posição</th>
+                                <th>Jogador</th>
+                                <th>Pontos</th>
+                                <th>Vitórias</th>
+                                <th>Derrotas</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr class="top-1">
+                                <td class= "top-1">1°</td>
+                                <td> Yuri Rego</td>
+                                <td> 76</td>
+                                <td> 18</td>
+                                <td> 6</td>
+                            </tr>
+
+                            <tr class="top-2">
+                                <td class="top-2">2°</td>
+                                <td> Renan Cuba</td>
+                                <td> 67</td>
+                                <td> 16</td>
+                                <td> 8</td>
+                            </tr>
+
+                            <tr class="top-3">
+                                <td class="top-3">3°</td>
+                                <td> Kayo Ribeiro</td>
+                                <td> 62</td>
+                                <td> 14</td>
+                                <td> 10</td>
+                            </tr>
+
+                            <tr>
+                                <td> 4°</td>
+                                <td> Kleber Rossel</td>
+                                <td> 55</td>
+                                <td> 11</td>
+                                <td> 13</td>
+                            </tr>
+
+                        </tbody>
+                        </table>
+                        </div>
+
+                        <a href="ranking.html">
+                            Ver Ranking Completo
+                        </a>
+                </section>
+
+                <section id="Decks">
+                    <h2> Decks Mais Utilizados </h2>
+                        <div class="lista-decks">
+                            <article class="card-deck">
+                                <h3>Mitsurugi</h3>
+                                <p><strong>Jogadores:</strong> 1</p>
+                                <p><strong>Percentual de uso:</strong> 25%</p>
+                                <a href="decks.html">
+                                    Ver Decklist
+                                </a>
+                            </article>
+
+                            <article class="card-deck">
+                                <h3>Branded</h3>
+                                <p><strong>Jogadores:</strong> 1</p>
+                                <p><strong>Percentual de uso:</strong> 25%</p>
+                                <a href="decks.html">
+                                    Ver Decklist
+                                </a>
+                            </article>
+
+                            <article class="card-deck">
+                                <h3>Elfnote</h3>
+                                <p><strong>Jogadores:</strong> 1</p>
+                                <p><strong>Percentual de uso:</strong> 25%</p>
+                                <a href="decks.html">
+                                    Ver Decklist
+                                </a>
+                            </article>
+
+                            <article class="card-deck">
+                                <h3>Yummy</h3>
+                                <p><strong>Jogadores:</strong> 1</p>
+                                <p><strong>Percentual de uso:</strong> 25%</p>
+                                <a href="decks.html">
+                                    Ver Decklist
+                                </a>
+                            </article>
+                        </div>
+                </section>
+
+            </main>
+            <footer>
+                <div class="footer-conteudo">
+                    <div class="footer-sobre">
+                        <h2>YGO São Luís</h2>
+                        <p>Sistema de divulgação e estatísticas
+                            dos torneios de Yu-Gi-Oh
+                            de São Luís, Maranhão.
+                        </p>
+                    </div>
+
+                    <div class="footer-navegacao">
+                        <h2>Navegação</h2>
+                        <ul>
+                            <li><a href="index.html">Início</a></li>
+                            <li><a href="torneios.html">Torneios</a></li>
+                            <li><a href="ranking.html">Ranking</a></li>
+                            <li><a href="jogadores.html">Jogadores</a></li>
+                            <li><a href="decks.html">Decks</a></li>
+                            <li><a href="noticias.html">Notícias</a></li>
+                            <li><a href="sobre.html">Sobre</a></li>                      
+                        </ul>
+                    </div>
+
+                    <div class="footer-contato">
+                        <h2>Projeto</h2>
+                        <p>Projeto desenvolvido como atividade
+                            extensionista do curso de ADS.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="footer-direitos">
+                      <p> © São Luís, 2026. Todos os direitos
+                        reservados.
+                      </p>
+                </div>
+              
+            </footer>
+
+            <script src="js/script.js"></script>
+        </body>
+    </html>
