@@ -563,358 +563,6 @@ footer {
     font-size: 14px;
 }
 
-@media (max-width: 768px) {
-    
-    header {
-        flex-direction: column;
-        gap: 20px;
-        padding: 20px;
-    }
-
-    nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-    }
-
-    #banner,
-    .slides,
-    .slide {
-        min-height: 360px;
-    }
-
-    .slide img {
-        height: 360px;
-    }
-
-    .slide-overlay {
-        align-items: flex-end;
-        padding: 30px 25px;
-
-        background: linear-gradient(
-        0deg,
-        rgba(5, 8, 25, 0.92) 0%,
-        rgba(5, 8, 25, 0.60) 55%,
-        rgba(5, 8, 25, 0.10) 100%
-    );
-    }
-
-    .banner-conteudo {
-        max-width: 100%;
-    }
-
-    .banner-conteudo h2 {
-        font-size: 27px;
-    }
-
-    .banner-conteudo p {
-        font-size: 14px;
-        line-height: 1.4;
-        margin-bottom: 15px;
-    }
-
-    .banner-conteudo a {
-    padding: 9px 16px;
-    font-size: 13px;
-    }
-
-    .slider-seta {
-        width: 38px;
-        height: 48px;
-        font-size: 24px;
-    }
-
-    .slider-anterior {
-        left: 8px;
-    }
-
-    .slider-proximo {
-        right: 8px;
-    }
-
-    .lista-torneios {
-        flex-direction: column;
-    }
-
-    .lista-noticias {
-        flex-direction: column;
-    }
-
-    .lista-decks {
-        grid-template-columns: 1fr;
-    }
-
-    .footer-conteudo {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-    }
-
-    #pagina-torneios {
-        padding: 40px 20px;
-    }
-
-    #pagina-torneios h2 {
-        font-size: 30px;
-    }
-
-    .filtros-torneios {
-        flex-direction: column;
-    }
-
-    .lista-torneios-pagina {
-        grid-template-columns: 1fr;
-    }
-
-    .cabecalho-detalhes {
-        padding: 45px 20px;
-    }
-
-    .cabecalho-detalhes h2 {
-        font-size: 30px;
-    }
-
-    .cabecalho-detalhes p {
-        font-size: 16px;
-    }
-
-
-    .informacoes-torneio {
-        margin: -20px 20px 40px;
-        grid-template-columns: 1fr 1fr;
-        padding: 20px;
-    }
-
-
-    .resultado-torneio {
-        padding: 0 20px;
-    }
-
-
-    .tabela-container {
-        overflow-x: auto;
-    }
-
-
-    .tabela-container table {
-        min-width: 700px;
-    }
-
-
-    .lista-decklists {
-        grid-template-columns: 1fr;
-    }
-
-
-    .decklists-torneio {
-        padding: 0 20px;
-    }
-
-    #pagina-ranking {
-        padding: 45px 20px;
-    }
-
-    #pagina-ranking h2 {
-        font-size: 30px;
-    }
-
-    #pagina-ranking .descricao-pagina {
-        font-size: 16px;
-    }
-
-
-    .filtros-ranking {
-        margin: -20px 20px 40px;
-        padding: 20px;
-    }
-
-
-    .filtros-ranking .filtro {
-        width: 100%;
-    }
-
-
-    .ranking {
-        padding: 0 20px;
-    }
-
-
-    .ranking h2 {
-        font-size: 26px;
-    }
-
-
-    .tabela-ranking {
-        overflow-x: auto;
-    }
-
-
-    .tabela-ranking table {
-        min-width: 700px;
-    }
-
-        #pagina-jogadores {
-        padding: 45px 20px;
-    }
-
-    #pagina-jogadores h2 {
-        font-size: 30px;
-    }
-
-    #pagina-jogadores .descricao-pagina {
-        font-size: 16px;
-    }
-
-
-    .busca-jogadores {
-        margin: -20px 20px 40px;
-        padding: 20px;
-    }
-
-
-    .lista-jogadores {
-        grid-template-columns: 1fr;
-        padding: 0 20px;
-    }
-
-     /* PERFIL DO JOGADOR */
-
-    .perfil-jogador {
-        padding: 45px 20px;
-    }
-
-    .cabecalho-perfil h2 {
-        font-size: 32px;
-    }
-
-    .cabecalho-perfil p {
-        font-size: 16px;
-    }
-
-
-    .estatisticas-jogador {
-        grid-template-columns: repeat(2, 1fr);
-        margin-top: -20px;
-    }
-
-
-    .estatistica .numero {
-        font-size: 26px;
-    }
-
-
-    .item-historico {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-
-
-    .posicao {
-        font-size: 16px;
-    }
-
-    .cabecalho-deck h2 {
-        font-size: 30px;
-    }
-
-
-    .estatisticas-deck {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-
-    .lista-jogadores-deck {
-        grid-template-columns: 1fr;
-    }
-
-
-    .jogadores-do-deck h2 {
-        font-size: 25px;
-    }
-
-    /* NOTÍCIAS */
-
-#pagina-noticias {
-    padding: 45px 20px;
-}
-
-#pagina-noticias h2 {
-    font-size: 30px;
-}
-
-#pagina-noticias .descricao-pagina {
-    font-size: 16px;
-}
-
-.busca-noticias {
-    margin: -20px 20px 40px;
-
-    padding: 20px;
-}
-
-.lista-noticias-pagina {
-    grid-template-columns: 1fr;
-
-    padding: 0 20px;
-}
-
-.card-noticia-pagina {
-    padding: 20px;
-}
-
-/* NOTÍCIA INDIVIDUAL */
-
-.noticia-individual {
-    margin: 30px 20px 50px;
-
-    padding: 25px;
-}
-
-.noticia-individual h2 {
-    font-size: 30px;
-}
-
-.conteudo-noticia {
-    font-size: 16px;
-}
-
-#pagina-sobre {
-    padding: 45px 20px;
-}
-
-#pagina-sobre h2 {
-    font-size: 30px;
-}
-
-.bloco-sobre {
-    padding: 22px;
-}
-
-}
-
-@media (max-width: 480px) {
-
-    .estatisticas-deck {
-        grid-template-columns: 1fr;
-    }
-
-
-
- .item-historico-deck {
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 15px;
-    }
-
-
-    .historico-deck h2 {
-        font-size: 25px;
-    }
-}
 
 /*TORNEIOS*/
 /* Banner da página torneios */
@@ -2394,4 +2042,244 @@ label {
 
 .slide[data-link] {
     cursor: pointer;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 15px;
+    }
+
+    /* HOME */
+
+    #banner,
+    .slides,
+    .slide {
+        min-height: 360px;
+    }
+
+    .slide img {
+        height: 360px;
+    }
+
+    .slide-overlay {
+        align-items: flex-end;
+        padding: 30px 25px;
+    }
+
+    .banner-conteudo {
+        max-width: 100%;
+    }
+
+    .banner-conteudo h2 {
+        font-size: 27px;
+    }
+
+    .banner-conteudo p {
+        font-size: 14px;
+    }
+
+    .lista-torneios,
+    .lista-noticias {
+        flex-direction: column;
+    }
+
+    .lista-decks {
+        grid-template-columns: 1fr;
+    }
+
+    .card-torneio,
+    .card-noticia,
+    .card-deck {
+        margin: 10px 0;
+    }
+
+    /* RANKING HOME */
+
+    #ranking a {
+        margin-left: 0;
+    }
+
+    /* TORNEIOS */
+
+    #pagina-torneios {
+        padding: 40px 20px;
+    }
+
+    #pagina-torneios h2 {
+        font-size: 30px;
+    }
+
+    .filtros-torneios {
+        flex-direction: column;
+    }
+
+    .lista-torneio-pagina {
+        grid-template-columns: 1fr;
+        margin: 0 auto;
+    }
+
+    .informacoes-torneio {
+        margin: -20px 20px 40px;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px;
+    }
+
+    .lista-decklists {
+        grid-template-columns: 1fr;
+    }
+
+    /* RANKING */
+
+    #pagina-ranking {
+        padding: 45px 20px;
+    }
+
+    .filtros-ranking {
+        margin: -20px 20px 40px;
+        padding: 20px;
+    }
+
+    .filtros-ranking .filtro {
+        width: 100%;
+    }
+
+    .ranking {
+        padding: 0 20px;
+    }
+
+    /* JOGADORES */
+
+    #pagina-jogadores {
+        padding: 45px 20px;
+    }
+
+    .busca-jogadores {
+        margin: -20px 20px 40px;
+        padding: 20px;
+    }
+
+    .lista-jogadores {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+
+    /* PERFIL DO JOGADOR */
+
+    .perfil-jogador {
+        padding: 45px 20px;
+    }
+
+    .estatisticas-jogador {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .item-historico {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    /* DECKS */
+
+    .lista-decks-pagina {
+        grid-template-columns: 1fr;
+    }
+
+    .estatisticas-deck {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .lista-jogadores-deck {
+        grid-template-columns: 1fr;
+    }
+
+    /* NOTÍCIAS */
+
+    #pagina-noticias {
+        padding: 45px 20px;
+    }
+
+    .busca-noticias {
+        margin: -20px 20px 40px;
+        padding: 20px;
+    }
+
+    .lista-noticias-pagina {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+
+    .card-noticia-pagina {
+        padding: 20px;
+    }
+
+    .noticia-individual {
+        margin: 30px 20px 50px;
+        padding: 25px;
+    }
+
+    /* SOBRE */
+
+    #pagina-sobre {
+        padding: 45px 20px;
+    }
+
+    .bloco-sobre {
+        padding: 22px;
+    }
+
+    /* FOOTER */
+
+    .footer-conteudo {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    #torneios,
+    #noticias,
+    #ranking,
+    #Decks {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .informacoes-torneio {
+        grid-template-columns: 1fr;
+    }
+
+    .estatisticas-jogador {
+        grid-template-columns: 1fr;
+    }
+
+    .estatisticas-deck {
+        grid-template-columns: 1fr;
+    }
+
+    .item-historico-deck {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .noticia-individual h2 {
+        font-size: 27px;
+    }
 }
