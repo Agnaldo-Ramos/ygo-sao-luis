@@ -1,13 +1,115 @@
 /* ========================================
+   PÁGINA DE TORNEIOS
+======================================== */
+
+function obterMesTorneio(data) {
+
+    const meses = {
+        "01": "janeiro",
+        "02": "fevereiro",
+        "03": "março",
+        "04": "abril",
+        "05": "maio",
+        "06": "junho",
+        "07": "julho",
+        "08": "agosto",
+        "09": "setembro",
+        "10": "outubro",
+        "11": "novembro",
+        "12": "dezembro"
+    };
+
+    const mes = data.split("/")[1];
+
+    return meses[mes] || "";
+}
+
+
+function carregarTorneios() {
+
+    const listaTorneios =
+        document.getElementById("lista-torneios");
+
+    if (!listaTorneios) {
+        return;
+    }
+
+    listaTorneios.innerHTML = "";
+
+    Object.entries(dadosTorneios).forEach(
+        function([identificador, torneio]) {
+
+            const partesData =
+                torneio.data.split("/");
+
+            const ano =
+                partesData[2];
+
+            const mes =
+                obterMesTorneio(torneio.data);
+
+            const card =
+                document.createElement("article");
+
+            card.classList.add(
+                "card-torneio-pagina"
+            );
+
+            card.dataset.mes = mes;
+            card.dataset.ano = ano;
+
+            card.innerHTML = `
+
+                <h3>${torneio.nome}</h3>
+
+                <p>
+                    <strong>Data:</strong>
+                    ${torneio.data}
+                </p>
+
+                <p>
+                    <strong>Horário:</strong>
+                    ${torneio.horario}
+                </p>
+
+                <p>
+                    <strong>Local:</strong>
+                    ${torneio.local}
+                </p>
+
+                <p>
+                    <strong>Formato:</strong>
+                    ${torneio.formato}
+                </p>
+
+                <p>
+                    <strong>Participantes:</strong>
+                    ${torneio.participantes}
+                </p>
+
+                <a href="torneio.html?id=${encodeURIComponent(identificador)}">
+                    Ver resultados
+                </a>
+            `;
+
+            listaTorneios.appendChild(card);
+        }
+    );
+}
+
+
+/* ========================================
    FILTRO DE TORNEIOS
 ======================================== */
 
-const busca = document.getElementById("busca");
-const filtroMes = document.getElementById("mes");
-const filtroAno = document.getElementById("ano");
+const busca =
+    document.getElementById("busca");
 
-const torneios =
-    document.querySelectorAll(".card-torneio-pagina");
+const filtroMes =
+    document.getElementById("mes");
+
+const filtroAno =
+    document.getElementById("ano");
 
 
 if (busca && filtroMes && filtroAno) {
@@ -15,7 +117,9 @@ if (busca && filtroMes && filtroAno) {
     function filtrarTorneios() {
 
         const textoBusca =
-            busca.value.toLowerCase();
+            busca.value
+                .trim()
+                .toLowerCase();
 
         const mesSelecionado =
             filtroMes.value;
@@ -23,21 +127,24 @@ if (busca && filtroMes && filtroAno) {
         const anoSelecionado =
             filtroAno.value;
 
+        const torneios =
+            document.querySelectorAll(
+                ".card-torneio-pagina"
+            );
 
         torneios.forEach(function(torneio) {
 
-            const nome = torneio
-                .querySelector("h3")
-                .textContent
-                .toLowerCase();
-
+            const nome =
+                torneio
+                    .querySelector("h3")
+                    .textContent
+                    .toLowerCase();
 
             const mes =
                 torneio.dataset.mes;
 
             const ano =
                 torneio.dataset.ano;
-
 
             const correspondeNome =
                 nome.includes(textoBusca);
@@ -50,7 +157,6 @@ if (busca && filtroMes && filtroAno) {
                 anoSelecionado === "" ||
                 ano === anoSelecionado;
 
-
             if (
                 correspondeNome &&
                 correspondeMes &&
@@ -62,11 +168,8 @@ if (busca && filtroMes && filtroAno) {
             } else {
 
                 torneio.style.display = "none";
-
             }
-
         });
-
     }
 
 
@@ -84,39 +187,56 @@ if (busca && filtroMes && filtroAno) {
         "change",
         filtrarTorneios
     );
-
 }
+
 /* ========================================
-   JAVA - JOGADORES BUSCA
+   PÁGINA DE JOGADORES
 ======================================== */
 
-const buscaJogador = document.getElementById("busca-jogador");
+function carregarJogadores() {
 
-const jogadores = document.querySelectorAll(".card-jogador");
+    const listaJogadores =
+        document.getElementById("lista-jogadores");
 
+    if (!listaJogadores) {
+        return;
+    }
 
-if (buscaJogador) {
+    listaJogadores.innerHTML = "";
 
-    buscaJogador.addEventListener("input", function () {
+    const jogadoresMap = {};
 
-        const texto = buscaJogador.value.toLowerCase();
+    Object.values(dadosTorneios).forEach(function(torneio) {
 
+        torneio.classificacao.forEach(function(participante) {
 
-        jogadores.forEach(function (jogador) {
+            const nome = participante.nome;
 
-            const nome = jogador
-                .querySelector("h3")
-                .textContent
-                .toLowerCase();
+            if (!jogadoresMap[nome]) {
 
+                jogadoresMap[nome] = {
+                    nome: nome,
+                    vitorias: 0,
+                    derrotas: 0,
+                    decks: {}
+                };
 
-            if (nome.includes(texto)) {
+            }
 
-                jogador.style.display = "block";
+            const jogador = jogadoresMap[nome];
 
-            } else {
+            jogador.vitorias += participante.vitorias;
+            jogador.derrotas += participante.derrotas;
 
-                jogador.style.display = "none";
+            if (
+                participante.deck &&
+                participante.deck.trim().toLowerCase() !== "não informado"
+            ) {
+
+                const nomeDeck = participante.deck.trim();
+
+                jogador.decks[nomeDeck] =
+                    (jogador.decks[nomeDeck] || 0) + 1;
 
             }
 
@@ -124,267 +244,114 @@ if (buscaJogador) {
 
     });
 
+    const jogadoresOrdenados =
+        Object.values(jogadoresMap)
+            .sort(function(a, b) {
+                return a.nome.localeCompare(b.nome);
+            });
+
+    jogadoresOrdenados.forEach(function(jogador) {
+
+        const decksOrdenados =
+            Object.entries(jogador.decks)
+                .sort(function(a, b) {
+                    return b[1] - a[1];
+                });
+
+        const deckPrincipal =
+            decksOrdenados.length > 0
+                ? decksOrdenados[0][0]
+                : "Não informado";
+
+        const card =
+            document.createElement("article");
+
+        card.classList.add("card-jogador");
+
+        card.innerHTML = `
+
+            <h3>${jogador.nome}</h3>
+
+            <p>
+                <strong>Deck:</strong>
+                ${deckPrincipal}
+            </p>
+
+            <p>
+                <strong>Vitórias:</strong>
+                ${jogador.vitorias}
+            </p>
+
+            <p>
+                <strong>Derrotas:</strong>
+                ${jogador.derrotas}
+            </p>
+
+            <a href="jogador.html?nome=${encodeURIComponent(jogador.nome)}">
+                Ver perfil
+            </a>
+
+        `;
+
+        listaJogadores.appendChild(card);
+
+    });
+
 }
 
+
 /* ========================================
-   PERFIL DOS JOGADORES
+   BUSCA DE JOGADORES
 ======================================== */
 
-const dadosJogadores = {
+const buscaJogador =
+    document.getElementById("busca-jogador");
 
-    yuri: {
-        nome: "Yuri Rego",
+if (buscaJogador) {
 
-        descricao: "Jogador de Yu-Gi-Oh! de São Luís",
+    buscaJogador.addEventListener(
+        "input",
+        function() {
 
-        torneios: 3,
+            const texto =
+                buscaJogador.value
+                    .trim()
+                    .toLowerCase();
 
-        vitorias: 18,
+            /*
+             * Busca os cards neste momento,
+             * depois de eles terem sido criados.
+             */
+            const jogadores =
+                document.querySelectorAll(
+                    ".card-jogador"
+                );
 
-        derrotas: 6,
+            jogadores.forEach(function(jogador) {
 
-        winrate: "75,0%",
+                const nome =
+                    jogador
+                        .querySelector("h3")
+                        .textContent
+                        .toLowerCase();
 
-        pontos: 76,
+                if (nome.includes(texto)) {
 
-        rankingAnual: {
+                    jogador.style.display = "";
 
-            "2026": {
-            posicao: 1,
-            vitorias: 18,
-            derrotas: 6,
-            pontos: 76
-        },
+                } else {
 
-    },
+                    jogador.style.display = "none";
 
-        deck: "Mitsurugi",
+                }
 
-        usoDeck: "Deck utilizado em 3 torneios.",
+            });
 
-        historico: [
-    {
-        torneio: "OTS Championship",
-        local: "Nexus Card Game",
-        data: "20/08/2026",
-        posicao: "1º Lugar",
-        deck: "Mitsurugi",
-        vitorias: 7,
-        derrotas: 1
-    },
+        }
+    );
 
-    {
-        torneio: "Weekly Tournament",
-        local: "Guilda98",
-        data: "27/08/2026",
-        posicao: "3º Lugar",
-        deck: "Mitsurugi",
-        vitorias: 5,
-        derrotas: 3
-    },
+}
 
-    {
-        torneio: "Evento Championship",
-        local: "Nexus Card Game",
-        data: "31/08/2026",
-        posicao: "2º Lugar",
-        deck: "Mitsurugi",
-        vitorias: 6,
-        derrotas: 2
-    }
-    ]
-    },
-
-    renan: {
-        nome: "Renan Cuba",
-
-        descricao: "Jogador de Yu-Gi-Oh! de São Luís",
-
-        torneios: 3,
-
-        vitorias: 16,
-
-        derrotas: 8,
-
-        winrate: "66,7%",
-
-        pontos: 67,
-
-        rankingAnual: {
-
-            "2026": {
-            posicao: 2,
-            vitorias: 16,
-            derrotas: 8,
-            pontos: 67
-        },
-
-    },
-
-        deck: "Branded",
-
-        usoDeck: "Deck utilizado em 3 torneios.",
-
-        historico: [
-    {
-        torneio: "OTS Championship",
-        local: "Nexus Card Game",
-        data: "20/08/2026",
-        posicao: "2º Lugar",
-        deck: "Branded",
-        vitorias: 6,
-        derrotas: 2
-    },
-
-    {
-        torneio: "Weekly Tournament",
-        local: "Guilda98",
-        data: "27/08/2026",
-        posicao: "1º Lugar",
-        deck: "Branded",
-        vitorias: 4,
-        derrotas: 4
-    },
-
-    {
-        torneio: "Evento Championship",
-        local: "Nexus Card Game",
-        data: "31/08/2026",
-        posicao: "4º Lugar",
-        deck: "Branded",
-        vitorias: 6,
-        derrotas: 2
-    }
-    ]
-    },
-
-    kayo: {
-        nome: "Kayo Ribeiro",
-
-        descricao: "Jogador de Yu-Gi-Oh! de São Luís",
-
-        torneios: 3,
-
-        vitorias: 14,
-
-        derrotas: 10,
-
-        winrate: "58,3%",
-
-        pontos: 62,
-
-        rankingAnual: {
-
-            "2026": {
-            posicao: 3,
-            vitorias: 14,
-            derrotas: 10,
-            pontos: 62
-        },
-
-    },
-
-        deck: "Yummy",
-
-        usoDeck: "Deck utilizado em 3 torneios.",
-
-        historico: [
-    {
-        torneio: "OTS Championship",
-        local: "Nexus Card Game",
-        data: "20/08/2026",
-        posicao: "3º Lugar",
-        deck: "Yummy",
-        vitorias: 5,
-        derrotas: 3
-    },
-
-    {
-        torneio: "Weekly Tournament",
-        local: "Guilda98",
-        data: "27/08/2026",
-        posicao: "2º Lugar",
-        deck: "Yummy",
-        vitorias: 4,
-        derrotas: 4
-    },
-
-    {
-        torneio: "Evento Championship",
-        local: "Nexus Card Game",
-        data: "31/08/2026",
-        posicao: "1º Lugar",
-        deck: "Yummy",
-        vitorias: 5,
-        derrotas: 3
-    }
-]
-    },
-
-    kleber: {
-        nome: "Kleber Rossel",
-
-        descricao: "Jogador de Yu-Gi-Oh! de São Luís",
-
-        torneios: 3,
-
-        vitorias: 11,
-
-        derrotas: 13,
-
-        winrate: "45,8%",
-
-        pontos: 55,
-
-        rankingAnual: {
-
-            "2026": {
-            posicao: 4,
-            vitorias: 11,
-            derrotas: 13,
-            pontos: 55
-        },
-
-    },
-
-        deck: "Elfnote",
-
-        usoDeck: "Deck utilizado em 3 torneios.",
-
-        historico: [
-    {
-        torneio: "OTS Championship",
-        local: "Nexus Card Game",
-        data: "20/08/2026",
-        posicao: "4º Lugar",
-        deck: "Elfnote",
-        vitorias: 4,
-        derrotas: 4
-    },
-
-    {
-        torneio: "Weekly Tournament",
-        local: "Guilda98",
-        data: "27/08/2026",
-        posicao: "4º Lugar",
-        deck: "Elfnote",
-        vitorias: 3,
-        derrotas: 5
-    },
-
-    {
-        torneio: "Evento Championship",
-        local: "Nexus Card Game",
-        data: "31/08/2026",
-        posicao: "3º Lugar",
-        deck: "Elfnote",
-        vitorias: 4,
-        derrotas: 4
-    }
-]
-    }
-
-};
 
 /* ========================================
    ESTATÍSTICAS AUTOMÁTICAS DOS DECKS
@@ -394,143 +361,99 @@ function calcularEstatisticasDecks() {
 
     const estatisticas = {};
 
+    Object.values(dadosTorneios).forEach(function(torneio) {
 
-    Object.values(dadosJogadores).forEach(
-        function(jogador) {
+        torneio.classificacao.forEach(function(participante) {
 
+            const nomeDeck = participante.deck;
 
-            jogador.historico.forEach(
-                function(participacao) {
+            // Não contabiliza decks desconhecidos.
+            if (
+                !nomeDeck ||
+                nomeDeck.trim().toLowerCase() === "não informado"
+            ) {
+                return;
+            }
 
+            const identificadorDeck = nomeDeck
+                .trim()
+                .toLowerCase()
+                .replaceAll(" ", "-");
 
-                    const nomeDeck =
-                        participacao.deck;
+            if (!estatisticas[identificadorDeck]) {
 
+                estatisticas[identificadorDeck] = {
 
-                    const identificadorDeck =
-                        nomeDeck
-                            .toLowerCase()
-                            .replaceAll(" ", "-");
+                    nome: nomeDeck,
 
+                    descricao:
+                        "Deck utilizado nos torneios de Yu-Gi-Oh! de São Luís.",
 
-                    // Se o deck ainda não existe,
-                    // ele é criado
-                    if (!estatisticas[identificadorDeck]) {
+                    jogadores: 0,
+                    torneios: 0,
+                    vitorias: 0,
+                    derrotas: 0,
+                    winrate: "0%",
 
-                        estatisticas[identificadorDeck] = {
+                    jogadoresLista: [],
+                    jogadoresSet: new Set()
 
-                            nome: nomeDeck,
+                };
 
-                            descricao:
-                                `Deck utilizado nos torneios de Yu-Gi-Oh! de São Luís.`,
+            }
 
-                            jogadores: 0,
+            const deck = estatisticas[identificadorDeck];
 
-                            torneios: 0,
+            // Cada participação corresponde a um jogador
+            // utilizando esse deck em um torneio.
+            deck.torneios += 1;
 
-                            vitorias: 0,
+            deck.vitorias += participante.vitorias;
+            deck.derrotas += participante.derrotas;
 
-                            derrotas: 0,
+            deck.jogadoresSet.add(participante.nome);
 
-                            winrate: "0%",
+        });
 
-                            jogadoresLista: [],
-
-                            jogadoresSet: new Set()
-
-                        };
-
-                    }
-
-
-                    const deck =
-                        estatisticas[identificadorDeck];
-
-
-                    // Conta uma participação em torneio
-                    deck.torneios += 1;
-
-
-                    // Soma as vitórias daquele torneio
-                    deck.vitorias +=
-                        participacao.vitorias;
-
-
-                    // Soma as derrotas daquele torneio
-                    deck.derrotas +=
-                        participacao.derrotas;
-
-
-                    // Registra o jogador sem duplicar
-                    deck.jogadoresSet.add(
-                        jogador.nome
-                    );
-
-
-                }
-            );
-
-        }
-    );
-
+    });
 
     /* ========================================
        FINALIZA AS ESTATÍSTICAS
     ======================================== */
 
-    Object.values(estatisticas).forEach(
-        function(deck) {
+    Object.values(estatisticas).forEach(function(deck) {
 
+        deck.jogadores = deck.jogadoresSet.size;
 
-            // Quantidade de jogadores diferentes
-            deck.jogadores =
-                deck.jogadoresSet.size;
+        deck.jogadoresLista = Array.from(
+            deck.jogadoresSet
+        );
 
+        const partidas = deck.vitorias + deck.derrotas;
 
-            // Transforma o Set em uma lista normal
-            deck.jogadoresLista =
-                Array.from(
-                    deck.jogadoresSet
-                );
+        if (partidas > 0) {
 
-
-            const partidas =
-                deck.vitorias +
-                deck.derrotas;
-
-
-            if (partidas > 0) {
-
-                deck.winrate =
-                    (
-                        deck.vitorias /
-                        partidas *
-                        100
-                    )
-                    .toFixed(1)
-                    .replace(".", ",")
-                    + "%";
-
-            }
-
-
-            // Não precisamos mais do Set
-            delete deck.jogadoresSet;
+            deck.winrate = (
+                deck.vitorias / partidas * 100
+            )
+                .toFixed(1)
+                .replace(".", ",") + "%";
 
         }
-    );
 
+        delete deck.jogadoresSet;
+
+    });
 
     return estatisticas;
 
 }
 
-
 /* ========================================
    DADOS DOS DECKS
 ======================================== */
 
-const dadosDecks = calcularEstatisticasDecks();
+let dadosDecks = {};
 
 /* ========================================
    CARDS DINÂMICOS DE DECKS
@@ -539,32 +462,49 @@ const dadosDecks = calcularEstatisticasDecks();
 const listaDecks =
     document.getElementById("lista-decks");
 
+function carregarCardsDecks() {
 
-if (listaDecks) {
+if (!listaDecks) {
+        return;
+    }
 
-    const decksCadastrados =
-        Object.entries(dadosDecks);
+    // Limpa os cards anteriores.
+    listaDecks.innerHTML = "";
 
+    const decksCadastrados = Object.entries(dadosDecks);
 
     decksCadastrados.forEach(function(deck) {
 
-        const identificador =
-            deck[0];
+        const identificador = deck[0];
+        const dados = deck[1];
 
-        const dados =
-            deck[1];
-
-
-        const card =
-            document.createElement("article");
-
-
-        card.classList.add(
-            "card-deck-pagina"
+        const decklistCorrespondente =
+            Object.values(dadosDecklists).find(
+        function(decklist) {
+            return decklist.deck === dados.nome;
+            }
         );
 
+        const cartaDestaque =
+                decklistCorrespondente?.cartaDestaque;
+
+        const card = document.createElement("article");
+
+        card.classList.add("card-deck-pagina");
 
         card.innerHTML = `
+
+            ${
+                cartaDestaque
+                    ? `
+                <img
+                class="carta-destaque-deck"
+                src="imgYGO/cartas/${cartaDestaque}.jpg"
+                alt=""
+                >
+                `
+                : ""
+            }
 
             <h3>${dados.nome}</h3>
 
@@ -588,110 +528,169 @@ if (listaDecks) {
                 ${dados.winrate}
             </p>
 
-            <a href="deck.html?nome=${identificador}">
+            <a href="deck.html?nome=${encodeURIComponent(identificador)}">
                 Ver detalhes
             </a>
 
         `;
 
-
         listaDecks.appendChild(card);
 
     });
-
 }
 
 /* ========================================
-   CARREGAR PERFIL DO JOGADOR
+   CARREGAR PERFIL REAL DO JOGADOR
 ======================================== */
 
-const parametros = new URLSearchParams(window.location.search);
+function carregarPerfilJogador() {
 
-const jogadorSelecionado = parametros.get("nome");
+    const parametros = new URLSearchParams(window.location.search);
+    const nomeSelecionado = parametros.get("nome");
 
+    const nomeJogador = document.getElementById("nome-jogador");
 
-if (jogadorSelecionado && dadosJogadores[jogadorSelecionado]) {
+    // Executa somente na página de perfil.
+    if (!nomeJogador || !nomeSelecionado) {
+        return;
+    }
 
-    const jogador = dadosJogadores[jogadorSelecionado];
+    const descricaoJogador = document.getElementById("descricao-jogador");
+    const torneiosJogador = document.getElementById("torneios-jogador");
+    const vitoriasJogador = document.getElementById("vitorias-jogador");
+    const derrotasJogador = document.getElementById("derrotas-jogador");
+    const winrateJogador = document.getElementById("winrate-jogador");
+    const deckJogador = document.getElementById("deck-jogador");
+    const usoDeck = document.getElementById("uso-deck");
+    const historicoJogador = document.getElementById("lista-historico-jogador");
 
+    let totalTorneios = 0;
+    let totalVitorias = 0;
+    let totalDerrotas = 0;
 
-    const nomeJogador =
-        document.getElementById("nome-jogador");
+    const decksUtilizados = {};
+    const historico = [];
 
-    const descricaoJogador =
-        document.getElementById("descricao-jogador");
+    Object.entries(dadosTorneios).forEach(function([torneioId, torneio]) {
 
-    const torneiosJogador =
-        document.getElementById("torneios-jogador");
+        const participante = torneio.classificacao.find(function(jogador) {
+            return jogador.nome.trim().toLowerCase() ===
+                nomeSelecionado.trim().toLowerCase();
+        });
 
-    const vitoriasJogador =
-        document.getElementById("vitorias-jogador");
+        if (!participante) {
+            return;
+        }
 
-    const derrotasJogador =
-        document.getElementById("derrotas-jogador");
+        totalTorneios++;
+        totalVitorias += participante.vitorias;
+        totalDerrotas += participante.derrotas;
 
-    const winrateJogador =
-        document.getElementById("winrate-jogador");
+        if (
+            participante.deck &&
+            participante.deck !== "Não informado"
+        ) {
+            decksUtilizados[participante.deck] =
+                (decksUtilizados[participante.deck] || 0) + 1;
+        }
 
-    const deckJogador =
-        document.getElementById("deck-jogador");
+        historico.push({
+            id: torneioId,
+            nome: torneio.nome,
+            local: torneio.local,
+            data: torneio.data,
+            posicao: participante.posicao,
+            deck: participante.deck
+        });
 
-    const usoDeck =
-        document.getElementById("uso-deck");
+    });
 
-    const historicoJogador =
-        document.getElementById("lista-historico-jogador");
+    if (totalTorneios === 0) {
+        nomeJogador.textContent = "Jogador não encontrado";
+        return;
+    }
 
+    const totalPartidas = totalVitorias + totalDerrotas;
 
-    nomeJogador.textContent = jogador.nome;
+    const winrate = totalPartidas > 0
+        ? ((totalVitorias / totalPartidas) * 100).toFixed(1)
+        : "0.0";
 
-    descricaoJogador.textContent = jogador.descricao;
+    const decksOrdenados = Object.entries(decksUtilizados)
+        .sort(function(a, b) {
+            return b[1] - a[1];
+        });
 
-    torneiosJogador.textContent = jogador.torneios;
+    const deckPrincipal = decksOrdenados.length > 0
+        ? decksOrdenados[0][0]
+        : "Não informado";
 
-    vitoriasJogador.textContent = jogador.vitorias;
+    const usoDeckPrincipal = decksOrdenados.length > 0
+        ? ((decksOrdenados[0][1] / totalTorneios) * 100).toFixed(0)
+        : "0";
 
-    derrotasJogador.textContent = jogador.derrotas;
+    nomeJogador.textContent = nomeSelecionado;
 
-    winrateJogador.textContent = jogador.winrate;
+    descricaoJogador.textContent =
+        "Histórico de participações nos torneios cadastrados no YgoSLZ.";
 
-    deckJogador.textContent = jogador.deck;
+    torneiosJogador.textContent = totalTorneios;
+    vitoriasJogador.textContent = totalVitorias;
+    derrotasJogador.textContent = totalDerrotas;
+    winrateJogador.textContent = winrate + "%";
+    deckJogador.textContent = deckPrincipal;
+    usoDeck.textContent = usoDeckPrincipal + "%";
 
-    usoDeck.textContent = jogador.usoDeck;
+    const linkDeckJogador =
+    document.getElementById("link-deck-jogador");
+
+if (linkDeckJogador && deckPrincipal !== "Não informado") {
+
+    const deckCorrespondente =
+        Object.entries(dadosDecks).find(
+            function([identificador, dados]) {
+                return dados.nome === deckPrincipal;
+            }
+        );
+
+    if (deckCorrespondente) {
+
+        const identificadorDeck =
+            deckCorrespondente[0];
+
+        linkDeckJogador.href =
+            `deck.html?nome=${encodeURIComponent(identificadorDeck)}`;
+    }
+}
 
     historicoJogador.innerHTML = "";
 
-    // Histórico de torneios do jogador //
+    historico.forEach(function(torneio) {
 
-    jogador.historico.forEach(function(torneio) {
+        const item = document.createElement("article");
 
-    const item = document.createElement("article");
+        item.classList.add("item-historico");
 
-    item.classList.add("item-historico");
+        item.innerHTML = `
+            <div>
+                <h3>
+                    <a href="torneio.html?id=${encodeURIComponent(torneio.id)}">
+                        ${torneio.nome}
+                    </a>
+                </h3>
 
+                <p>${torneio.local} — ${torneio.data}</p>
+                <p>Deck: ${torneio.deck}</p>
+            </div>
 
-    item.innerHTML = `
+            <span class="posicao">
+                ${torneio.posicao}
+            </span>
+        `;
 
-        <div>
+        historicoJogador.appendChild(item);
 
-            <h3>${torneio.torneio}</h3>
-
-            <p>${torneio.local}</p>
-
-        </div>
-
-        <span class="posicao">
-
-            ${torneio.posicao}
-
-        </span>
-
-    `;
-
-
-    historicoJogador.appendChild(item);
-
-});
+    });
 
 }
 
@@ -706,122 +705,111 @@ const periodo =
     document.getElementById("periodo");
 
 
-if (corpoRanking && periodo) {
+function calcularRanking(anoSelecionado = "") {
 
+    const jogadoresRanking = {};
 
-    function atualizarRanking() {
+    Object.values(dadosTorneios).forEach(function(torneio) {
 
-        // Limpa o ranking antes de criar novamente
-        corpoRanking.innerHTML = "";
+        const anoTorneio = torneio.data.split("/")[2];
 
+        if (
+            anoSelecionado !== "" &&
+            anoTorneio !== anoSelecionado
+        ) {
+            return;
+        }
 
-        // Pega todos os jogadores
-        const jogadoresRanking =
-            Object.values(dadosJogadores);
+        torneio.classificacao.forEach(function(participante) {
 
+            const identificador =
+                participante.nome.trim().toLowerCase();
 
-        // Descobre qual período foi selecionado
-        const anoSelecionado =
-            periodo.value;
+            if (!jogadoresRanking[identificador]) {
 
-
-        // Cria uma lista temporária com os dados
-        const rankingOrganizado =
-            jogadoresRanking.map(function(jogador) {
-
-
-                // Se estiver no ranking geral
-                if (anoSelecionado === "") {
-
-                    return {
-
-                        nome: jogador.nome,
-
-                        deck: jogador.deck,
-
-                        vitorias: jogador.vitorias,
-
-                        derrotas: jogador.derrotas,
-
-                        pontos: jogador.pontos
-
-                    };
-
-                }
-
-
-                // Se estiver selecionado um ano
-                const dadosAno =
-                    jogador.rankingAnual[anoSelecionado];
-
-
-                return {
-
-                    nome: jogador.nome,
-
-                    deck: jogador.deck,
-
-                    vitorias: dadosAno.vitorias,
-
-                    derrotas: dadosAno.derrotas,
-
-                    pontos: dadosAno.pontos
-
+                jogadoresRanking[identificador] = {
+                    nome: participante.nome,
+                    deck: "Não informado",
+                    vitorias: 0,
+                    derrotas: 0,
+                    pontos: 0
                 };
 
-            });
+            }
 
+            const jogador = jogadoresRanking[identificador];
 
-        // Organiza pelo maior número de pontos
-        rankingOrganizado.sort(function(a, b) {
+            jogador.vitorias += participante.vitorias;
+            jogador.derrotas += participante.derrotas;
+            jogador.pontos += participante.vitorias * 3;
 
+            if (
+                participante.deck &&
+                participante.deck !== "Não informado"
+            ) {
+                jogador.deck = participante.deck;
+            }
+
+        });
+
+    });
+
+    const ranking = Object.values(jogadoresRanking);
+
+    ranking.sort(function(a, b) {
+
+        if (b.pontos !== a.pontos) {
             return b.pontos - a.pontos;
+        }
 
-        });
+        return a.nome.localeCompare(b.nome, "pt-BR");
 
+    });
 
-        // Cria as linhas da tabela
-        rankingOrganizado.forEach(function(jogador, index) {
-
-            const linha =
-                document.createElement("tr");
-
-
-            linha.innerHTML = `
-
-                <td>${index + 1}º</td>
-
-                <td>${jogador.nome}</td>
-
-                <td>${jogador.deck}</td>
-
-                <td>${jogador.vitorias}</td>
-
-                <td>${jogador.derrotas}</td>
-
-                <td>${jogador.pontos}</td>
-
-            `;
+    return ranking;
+}
 
 
-            corpoRanking.appendChild(linha);
+function atualizarRanking() {
 
-        });
-
+    if (!corpoRanking || !periodo) {
+        return;
     }
 
+    corpoRanking.innerHTML = "";
 
-    // Atualiza o ranking quando mudar o período
+    const ranking = calcularRanking(periodo.value);
+
+    ranking.forEach(function(jogador, index) {
+
+        const linha = document.createElement("tr");
+
+        linha.innerHTML = `
+            <td>${index + 1}º</td>
+            <td><a href="jogador.html?nome=${encodeURIComponent(jogador.nome)}">
+            ${jogador.nome}</a></td>
+            <td>${jogador.deck}</td>
+            <td>${jogador.vitorias}</td>
+            <td>${jogador.derrotas}</td>
+            <td>${jogador.pontos}</td>
+        `;
+
+        corpoRanking.appendChild(linha);
+
+    });
+
+}
+
+
+if (corpoRanking && periodo) {
+
     periodo.addEventListener(
         "change",
         atualizarRanking
     );
 
-
-    // Cria o ranking ao abrir a página
-    atualizarRanking();
-
 }
+
 
 /* ========================================
    BUSCA DE DECKS
@@ -870,32 +858,34 @@ if (buscaDeck) {
 
 }
 
+
 /* ========================================
    PÁGINA DINÂMICA DO DECK
 ======================================== */
 
-const parametrosDeck =
-    new URLSearchParams(window.location.search);
+function carregarPaginaDeck() {
 
-const deckSelecionado =
-    parametrosDeck.get("nome");
-
-const listaHistoricoDeck =
-        document.getElementById(
-        "lista-historico-deck"
-         );
-
-
-if (
-    deckSelecionado &&
-    dadosDecks[deckSelecionado]
-) {
-
-    const deck =
-        dadosDecks[deckSelecionado];
-
-    const nomeDeck =
+    const nomeDeckElemento =
         document.getElementById("nome-deck");
+
+    // Executa somente na página individual do deck.
+    if (!nomeDeckElemento) {
+        return;
+    }
+
+    const parametrosDeck =
+        new URLSearchParams(window.location.search);
+
+    const deckSelecionado =
+        parametrosDeck.get("nome");
+
+    const deck = dadosDecks[deckSelecionado];
+
+    if (!deck) {
+        nomeDeckElemento.textContent =
+            "Deck não encontrado";
+        return;
+    }
 
     const descricaoDeck =
         document.getElementById("descricao-deck");
@@ -913,253 +903,201 @@ if (
         document.getElementById("winrate-deck");
 
     const listaJogadoresDeck =
-        document.getElementById(
-            "lista-jogadores-deck"
-        );
+        document.getElementById("lista-jogadores-deck");
+
+    const listaHistoricoDeck =
+        document.getElementById("lista-historico-deck");
 
 
-    if (nomeDeck) {
+    /* INFORMAÇÕES GERAIS */
 
-        nomeDeck.textContent =
-            deck.nome;
+    nomeDeckElemento.textContent = deck.nome;
+    descricaoDeck.textContent = deck.descricao;
+    jogadoresDeck.textContent = deck.jogadores;
+    torneiosDeck.textContent = deck.torneios;
+    vitoriasDeck.textContent = deck.vitorias;
+    winrateDeck.textContent = deck.winrate;
 
-        descricaoDeck.textContent =
-            deck.descricao;
 
-        jogadoresDeck.textContent =
-            deck.jogadores;
+    /* JOGADORES QUE UTILIZARAM O DECK */
 
-        torneiosDeck.textContent =
-            deck.torneios;
-
-        vitoriasDeck.textContent =
-            deck.vitorias;
-
-        winrateDeck.textContent =
-            deck.winrate;
+    if (listaJogadoresDeck) {
 
         listaJogadoresDeck.innerHTML = "";
 
+        deck.jogadoresLista.forEach(function(nomeJogador) {
+            
+            const decklistJogador =
+    Object.entries(dadosDecklists).find(function([id, decklist]) {
 
-       deck.jogadoresLista.forEach(
-    function(nomeJogador) {
+        return (
+            decklist.jogador.trim().toLowerCase() ===
+                nomeJogador.trim().toLowerCase() &&
 
-        const jogador =
-            document.createElement("article");
-
-
-        jogador.classList.add(
-            "card-jogador-deck"
+            decklist.deck.trim().toLowerCase() ===
+                deck.nome.trim().toLowerCase()
         );
 
+    });
 
-        let identificadorJogador = "";
+            const jogador =
+                document.createElement("article");
 
+            jogador.classList.add(
+                "card-jogador-deck"
+            );
 
-        Object.entries(dadosJogadores).forEach(
-            function(item) {
+           jogador.innerHTML = `
+    <h3>${nomeJogador}</h3>
 
-                const chave = item[0];
-                const dados = item[1];
+    <a href="jogador.html?nome=${encodeURIComponent(nomeJogador)}">
+        Ver perfil
+    </a>
 
-
-                if (dados.nome === nomeJogador) {
-
-                    identificadorJogador =
-                        chave;
-
-                }
-
-            }
-        );
-
-
-        jogador.innerHTML = `
-
-            <h3>
-                ${nomeJogador}
-            </h3>
-
-            <a href="jogador.html?nome=${identificadorJogador}">
-                Ver perfil
-            </a>
-
-        `;
-
-
-        listaJogadoresDeck.appendChild(
-            jogador
-        );
-
+    ${
+        decklistJogador
+            ? `
+                <a href="decklist.html?id=${encodeURIComponent(decklistJogador[0])}">
+                    Ver decklist
+                </a>
+            `
+            : ""
     }
-);
+`;
+
+            listaJogadoresDeck.appendChild(jogador);
+
+        });
 
     }
 
-}
 
-/* ========================================
-   HISTÓRICO DO DECK
-======================================== */
+    /* HISTÓRICO REAL DO DECK */
 
+    if (listaHistoricoDeck) {
 
-if (listaHistoricoDeck) {
+        listaHistoricoDeck.innerHTML = "";
 
-    listaHistoricoDeck.innerHTML = "";
+        let encontrouHistorico = false;
 
-    let encontrouHistorico = false;
+        Object.entries(dadosTorneios).forEach(
+            function([torneioId, torneio]) {
 
+                torneio.classificacao.forEach(
+                    function(participante) {
 
-    Object.values(dadosJogadores).forEach(
-        function(jogador) {
-
-
-            jogador.historico.forEach(
-                function(participacao) {
-
-
-                    // Evita erro caso algum torneio
-                    // ainda não tenha deck cadastrado
-                    if (!participacao.deck) {
-                        return;
-                    }
-
-
-                    const identificadorParticipacao =
-                        participacao.deck
-                            .toLowerCase()
-                            .replaceAll(" ", "-");
-
-
-                    if (
-                        identificadorParticipacao ===
-                        deckSelecionado
-                    ) {
+                        if (
+                            !participante.deck ||
+                            participante.deck.trim().toLowerCase() !==
+                            deck.nome.trim().toLowerCase()
+                        ) {
+                            return;
+                        }
 
                         encontrouHistorico = true;
 
-                        const identificadorTorneio =
-                            participacao.torneio
-                                .toLowerCase()
-                                .replaceAll(" ", "-");
-
-
                         const itemHistorico =
-                            document.createElement(
-                                "article"
-                            );
-
+                            document.createElement("article");
 
                         itemHistorico.classList.add(
                             "item-historico-deck"
                         );
-
 
                         itemHistorico.innerHTML = `
 
                             <div class="dados-historico-deck">
 
                                 <h3>
-                                <a href="torneio.html?id=${identificadorTorneio}">
-                                    ${participacao.torneio}
-                                </a>
+                                    <a href="torneio.html?id=${encodeURIComponent(torneioId)}">
+                                        ${torneio.nome}
+                                    </a>
                                 </h3>
 
                                 <p>
                                     <strong>Data:</strong>
-                                    ${participacao.data}
+                                    ${torneio.data}
                                 </p>
 
                                 <p>
                                     <strong>Jogador:</strong>
-                                    ${jogador.nome}
+                                    ${participante.nome}
                                 </p>
 
                                 <p>
                                     <strong>Local:</strong>
-                                    ${participacao.local}
+                                    ${torneio.local}
                                 </p>
 
                                 <p>
                                     <strong>Colocação:</strong>
-                                    ${participacao.posicao}
+                                    ${participante.posicao}
                                 </p>
 
                             </div>
 
-
                             <div class="resultado-historico-deck">
 
                                 <span>
-                                    ${participacao.vitorias}V
+                                    ${participante.vitorias}V
                                 </span>
 
                                 <span>
-                                    ${participacao.derrotas}D
+                                    ${participante.derrotas}D
                                 </span>
 
                             </div>
-
                         `;
-
 
                         listaHistoricoDeck.appendChild(
                             itemHistorico
                         );
 
                     }
+                );
 
-                }
-            );
+            }
+        );
+
+        if (!encontrouHistorico) {
+
+            listaHistoricoDeck.innerHTML = `
+                <p class="sem-historico">
+                    Nenhum histórico encontrado
+                    para este deck.
+                </p>
+            `;
 
         }
-    );
-
-
-    if (!encontrouHistorico) {
-
-        listaHistoricoDeck.innerHTML = `
-            <p class="sem-historico">
-                Nenhum histórico encontrado
-                para este deck.
-            </p>
-        `;
 
     }
 
 }
 
+
 /* ========================================
-   DADOS DOS TORNEIOS
+   INICIALIZAR RANKING
 ======================================== */
 
-const dadosTorneios = {
+if (corpoRanking && periodo) {
+    atualizarRanking();
+}
+// Calcula os decks depois de carregar os torneios.
+dadosDecks = calcularEstatisticasDecks();
 
-    "ots-championship": {
-        nome: "OTS Championship",
-        data: "20/08/2026",
-        horario: "16:00",
-        local: "Nexus Card Game",
-        formato: "Tradicional"
-    },
+// Carrega o perfil somente depois de cadastrar os torneios.
+carregarPerfilJogador();
 
-    "weekly-tournament": {
-        nome: "Weekly Tournament",
-        data: "27/08/2026",
-        horario: "15:00",
-        local: "Guilda98",
-        formato: "Tradicional"
-    },
+// Cards da página de decks
+carregarCardsDecks();
 
-    "evento-championship": {
-        nome: "Evento Championship",
-        data: "31/08/2026",
-        horario: "14:00",
-        local: "Nexus Card Game",
-        formato: "Tradicional"
-    }
+// Página individual do deck
+carregarPaginaDeck();
 
-};
+// Página geral de jogadores
+carregarJogadores();
+
+// Página geral de torneios
+carregarTorneios();
 
 /* ========================================
    PÁGINA DINÂMICA DO TORNEIO
@@ -1238,207 +1176,111 @@ if (
    CLASSIFICAÇÃO DO TORNEIO
 ======================================== */
 
-if (corpoClassificacao) {
+if (corpoClassificacao &&
+    Array.isArray(torneio.classificacao)) {
 
     corpoClassificacao.innerHTML = "";
 
-    const participantes = [];
-
-
-    Object.entries(dadosJogadores).forEach(
-        function(item) {
-
-            const identificadorJogador = item[0];
-            const jogador = item[1];
-
-
-            jogador.historico.forEach(
-                function(participacao) {
-
-                    const identificadorParticipacao =
-                        participacao.torneio
-                            .toLowerCase()
-                            .replaceAll(" ", "-");
-
-
-                    if (
-                        identificadorParticipacao ===
-                        torneioSelecionado
-                    ) {
-
-                        participantes.push({
-
-                            id: identificadorJogador,
-
-                            nome: jogador.nome,
-
-                            deck: participacao.deck,
-
-                            posicao: participacao.posicao,
-
-                            vitorias: participacao.vitorias,
-
-                            derrotas: participacao.derrotas
-
-                        });
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-    /* ========================================
-       QUANTIDADE DE PARTICIPANTES
-    ======================================== */
-
     const participantesTorneio =
-        document.getElementById(
-            "participantes-torneio"
-        );
-
+        document.getElementById("participantes-torneio");
 
     if (participantesTorneio) {
-
         participantesTorneio.textContent =
-            participantes.length;
-
+            torneio.participantes;
     }
 
+    torneio.classificacao.forEach(function(participante) {
 
-    /* ========================================
-       ORDENAR CLASSIFICAÇÃO
-    ======================================== */
+        const linha = document.createElement("tr");
 
-    participantes.sort(
-        function(a, b) {
+        linha.innerHTML = `
+            <td>${participante.posicao}</td>
+            <td>${participante.nome}</td>
+            <td>${participante.deck}</td>
+            <td>${participante.vitorias ?? "-"}</td>
+            <td>${participante.derrotas ?? "-"}</td>
+            <td>${participante.pontos ?? "-"}</td>
+        `;
 
-            return (
-                parseInt(a.posicao) -
-                parseInt(b.posicao)
-            );
+        corpoClassificacao.appendChild(linha);
 
-        }
-    );
+    });
 
-
-    /* ========================================
-       CRIAR LINHAS DA TABELA
-    ======================================== */
-
-    participantes.forEach(
-        function(participante) {
-
-            const linha =
-                document.createElement("tr");
-
-
-            linha.innerHTML = `
-
-                <td>
-                    ${participante.posicao}
-                </td>
-
-                <td>
-                    <a href="jogador.html?nome=${participante.id}">
-                        ${participante.nome}
-                    </a>
-                </td>
-
-                <td>
-                    ${participante.deck}
-                </td>
-
-                <td>
-                    ${participante.vitorias}
-                </td>
-
-                <td>
-                    ${participante.derrotas}
-                </td>
-
-            `;
-
-
-            corpoClassificacao.appendChild(
-                linha
-            );
-
-        }
-    );
-
-
-    /* ========================================
-       DECKLISTS DO TORNEIO
-    ======================================== */
+    /* DECKLISTS DO TORNEIO */
 
     const listaDecklistsTorneio =
-        document.getElementById(
-            "lista-decklists-torneio"
-        );
-
+        document.getElementById("lista-decklists-torneio");
 
     if (listaDecklistsTorneio) {
 
         listaDecklistsTorneio.innerHTML = "";
 
+        torneio.classificacao.forEach(function(participante) {
 
-        participantes.forEach(
-            function(participante) {
+            const card = document.createElement("article");
 
-                const identificadorDeck =
-                    participante.deck
-                        .toLowerCase()
-                        .replaceAll(" ", "-");
+            card.classList.add("card-decklist");
 
+  const decklistEncontrada =
+    Object.entries(dadosDecklists).find(
+        function([id, decklist]) {
 
-                const card =
-                    document.createElement(
-                        "article"
-                    );
+            return (
+                decklist.jogador === participante.nome &&
+                Array.isArray(decklist.torneios) &&
+                decklist.torneios.includes(torneioSelecionado)
+            );
 
-
-                card.classList.add(
-                    "card-decklist"
-                );
-
-
-                card.innerHTML = `
-
-                    <h3>
-                        ${participante.deck}
-                    </h3>
-
-                    <p>
-                        ${participante.nome}
-                    </p>
-
-                    <p>
-                        <strong>Colocação:</strong>
-                        ${participante.posicao}
-                    </p>
-
-                    <a href="deck.html?nome=${identificadorDeck}">
-                        Ver detalhes
-                    </a>
-
-                `;
+        }
+    );
 
 
-                listaDecklistsTorneio.appendChild(
-                    card
-                );
+    let botaoDecklist = "";
 
-            }
-        );
+
+    if (decklistEncontrada) {
+
+    const idDecklist =
+        decklistEncontrada[0];
+
+    botaoDecklist = `
+        <a
+            class="botao-ver-decklist"
+            href="decklist.html?id=${idDecklist}">
+            Ver Decklist
+        </a>
+    `;
+
+}
+
+            card.innerHTML = `
+                <h3>${participante.deck}</h3>
+
+                <p>${participante.nome}</p>
+
+                <p>
+                    <strong>Colocação:</strong>
+                    ${participante.posicao}
+                </p>
+
+                <p>
+                    <strong>Pontos:</strong>
+                    ${participante.pontos ?? "-"}
+                </p>
+
+                ${botaoDecklist}
+            `;
+
+            
+            listaDecklistsTorneio.appendChild(card);
+
+        });
+
+    }
 
     }
 
 }
-} 
 
 /* ========================================
    BUSCA DE NOTÍCIAS
@@ -1883,3 +1725,486 @@ slidesClicaveis.forEach(
 
     }
 );
+
+// ========================================
+// PÁGINA DE DECKLIST
+// ========================================
+
+function carregarPaginaDecklist() {
+
+    const containerMain =
+        document.getElementById("decklist-main");
+
+    // Se não estamos na página decklist.html,
+    // não executa esta função.
+    if (!containerMain) {
+        return;
+    }
+
+
+    const parametros =
+        new URLSearchParams(window.location.search);
+
+    const idDecklist =
+        parametros.get("id");
+
+
+    const decklist =
+        dadosDecklists[idDecklist];
+
+
+    if (!decklist) {
+
+        document.querySelector(".pagina-decklist").innerHTML = `
+            <div class="cabecalho-decklist">
+                <h1>Decklist não encontrada</h1>
+
+                <p>
+                    A decklist solicitada não está cadastrada.
+                </p>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    // -----------------------------
+    // Informações principais
+    // -----------------------------
+
+    document.getElementById(
+        "decklist-jogador"
+    ).textContent =
+        decklist.jogador;
+
+
+    document.getElementById(
+        "decklist-deck"
+    ).textContent =
+        decklist.deck;
+
+// -----------------------------
+// Torneios em que a decklist foi utilizada
+// -----------------------------
+
+const containerTorneios =
+    document.getElementById(
+        "decklist-torneios"
+    );
+
+
+if (
+    containerTorneios &&
+    Array.isArray(decklist.torneios)
+) {
+
+    containerTorneios.innerHTML = "";
+
+
+    decklist.torneios.forEach(
+        function(idTorneio) {
+
+            const torneio =
+                dadosTorneios[idTorneio];
+
+
+            if (!torneio) {
+                return;
+            }
+
+
+            const participante =
+                torneio.classificacao.find(
+                    function(item) {
+
+                        return item.nome ===
+                            decklist.jogador;
+
+                    }
+                );
+
+
+           const linha =
+    document.createElement("a");
+
+
+linha.href =
+    `torneio.html?id=${idTorneio}`;
+
+
+linha.classList.add(
+    "link-torneio-decklist"
+);
+
+
+if (participante) {
+
+    linha.textContent =
+        `${torneio.nome} — ${torneio.data} — ${participante.posicao} lugar`;
+
+} else {
+
+    linha.textContent =
+        `${torneio.nome} — ${torneio.data}`;
+
+}
+
+
+containerTorneios.appendChild(
+    linha
+);
+        }
+    );
+
+}
+        
+    // -----------------------------
+    // Função para contar cartas
+    // -----------------------------
+
+    function contarCartas(cartas) {
+
+        return cartas.reduce(
+            function(total, carta) {
+
+                return total +
+                    carta.quantidade;
+
+            },
+            0
+        );
+
+    }
+
+
+    const quantidadeMain =
+        contarCartas(decklist.main);
+
+    const quantidadeExtra =
+        contarCartas(decklist.extra);
+
+    const quantidadeSide =
+        contarCartas(decklist.side);
+
+
+    document.getElementById(
+        "quantidade-main"
+    ).textContent =
+        `${quantidadeMain} cartas`;
+
+
+    document.getElementById(
+        "quantidade-extra"
+    ).textContent =
+        `${quantidadeExtra} cartas`;
+
+
+    document.getElementById(
+        "quantidade-side"
+    ).textContent =
+        `${quantidadeSide} cartas`;
+
+
+    // -----------------------------
+    // Renderizar cartas
+    // -----------------------------
+
+    function renderizarCartas(
+        cartas,
+        container
+    ) {
+
+        container.innerHTML = "";
+
+
+        cartas.forEach(function(carta) {
+
+            for (
+                let i = 0;
+                i < carta.quantidade;
+                i++
+            ) {
+
+                const imagem =
+                    document.createElement("img");
+
+                imagem.src =
+                    `imgYGO/cartas/${carta.id}.jpg`;
+
+                imagem.alt =
+                    carta.nome;
+
+                imagem.title =
+                    carta.nome;
+
+                imagem.classList.add(
+                    "carta-decklist"
+                );
+
+                container.appendChild(
+                    imagem
+                );
+
+            }
+
+        });
+
+    }
+
+
+    renderizarCartas(
+        decklist.main,
+        containerMain
+    );
+
+
+    renderizarCartas(
+        decklist.extra,
+        document.getElementById(
+            "decklist-extra"
+        )
+    );
+
+
+    renderizarCartas(
+        decklist.side,
+        document.getElementById(
+            "decklist-side"
+        )
+    );
+
+}
+
+
+carregarPaginaDecklist();
+
+/* ========================================
+   TOP 4 DA PÁGINA INICIAL
+======================================== */
+
+function carregarRankingHome() {
+
+    const corpoRankingHome =
+        document.getElementById("ranking-home");
+
+    // Se não estiver na página inicial,
+    // não executa esta parte
+    if (!corpoRankingHome) {
+        return;
+    }
+
+    const jogadores = {};
+
+    // Percorre todos os torneios cadastrados
+    Object.values(dadosTorneios).forEach(function(torneio) {
+
+        if (!Array.isArray(torneio.classificacao)) {
+            return;
+        }
+
+        torneio.classificacao.forEach(function(participante) {
+
+            if (!jogadores[participante.nome]) {
+                jogadores[participante.nome] = {
+                    nome: participante.nome,
+                    pontos: 0,
+                    vitorias: 0,
+                    derrotas: 0
+                };
+            }
+
+            jogadores[participante.nome].pontos +=
+                Number(participante.pontos) || 0;
+
+            jogadores[participante.nome].vitorias +=
+                Number(participante.vitorias) || 0;
+
+            jogadores[participante.nome].derrotas +=
+                Number(participante.derrotas) || 0;
+        });
+    });
+
+    // Transforma em lista e ordena o ranking
+    const ranking = Object.values(jogadores);
+
+    ranking.sort(function(a, b) {
+
+        // 1º critério: pontos
+        if (b.pontos !== a.pontos) {
+            return b.pontos - a.pontos;
+        }
+
+        // 2º critério: vitórias
+        if (b.vitorias !== a.vitorias) {
+            return b.vitorias - a.vitorias;
+        }
+
+        // 3º critério: menos derrotas
+        return a.derrotas - b.derrotas;
+    });
+
+    // Pega somente os 4 primeiros
+    const top4 = ranking.slice(0, 4);
+
+    corpoRankingHome.innerHTML = "";
+
+    top4.forEach(function(jogador, indice) {
+
+        const linha =
+            document.createElement("tr");
+
+        // Mantém as classes visuais
+        // que você já utilizava no Top 3
+        if (indice === 0) {
+            linha.classList.add("top-1");
+        }
+
+        if (indice === 1) {
+            linha.classList.add("top-2");
+        }
+
+        if (indice === 2) {
+            linha.classList.add("top-3");
+        }
+
+        linha.innerHTML = `
+            <td>${indice + 1}°</td>
+            <td>${jogador.nome}</td>
+            <td>${jogador.pontos}</td>
+            <td>${jogador.vitorias}</td>
+            <td>${jogador.derrotas}</td>
+        `;
+
+        corpoRankingHome.appendChild(linha);
+    });
+}
+
+carregarRankingHome();
+
+/* ========================================
+   TOP 3 DECKS MAIS UTILIZADOS - HOME
+======================================== */
+
+function carregarDecksMaisUtilizados() {
+
+    const containerDecks =
+        document.getElementById("decks-mais-utilizados");
+
+    // Se não estiver na página inicial,
+    // não executa esta parte
+    if (!containerDecks) {
+        return;
+    }
+
+    const contagemDecks = {};
+
+    let totalDecksInformados = 0;
+
+    // Percorre todos os torneios cadastrados
+    Object.values(dadosTorneios).forEach(function(torneio) {
+
+        if (!Array.isArray(torneio.classificacao)) {
+            return;
+        }
+
+        torneio.classificacao.forEach(function(participante) {
+
+            const nomeDeck = participante.deck;
+
+            // Ignora decks sem informação
+            if (
+                !nomeDeck ||
+                nomeDeck.trim().toLowerCase() === "não informado"
+            ) {
+                return;
+            }
+
+            if (!contagemDecks[nomeDeck]) {
+                contagemDecks[nomeDeck] = {
+                    nome: nomeDeck,
+                    aparicoes: 0
+                };
+            }
+
+            contagemDecks[nomeDeck].aparicoes++;
+            totalDecksInformados++;
+        });
+    });
+
+    // Transforma o objeto em lista
+    const rankingDecks =
+        Object.values(contagemDecks);
+
+    // Ordena do mais utilizado para o menos utilizado
+    rankingDecks.sort(function(a, b) {
+        return b.aparicoes - a.aparicoes;
+    });
+
+    // Mostra somente os 3 primeiros
+    const top3Decks =
+        rankingDecks.slice(0, 3);
+
+    containerDecks.innerHTML = "";
+
+    top3Decks.forEach(function(deck) {
+
+        const percentual =
+            totalDecksInformados > 0
+                ? (
+                    deck.aparicoes /
+                    totalDecksInformados *
+                    100
+                ).toFixed(1)
+                : 0;
+
+        const deckCorrespondente =
+             Object.entries(dadosDecks).find(
+        function([identificador, dados]) {
+            return dados.nome === deck.nome;
+            }
+        );
+
+        const identificadorDeck =
+                deckCorrespondente
+                ? deckCorrespondente[0]
+                : null;
+
+        const card =
+            document.createElement("article");
+
+        card.classList.add("card-deck");
+
+        card.innerHTML = `
+            <h3>${deck.nome}</h3>
+
+            <p>
+                <strong>Aparições:</strong>
+                ${deck.aparicoes}
+            </p>
+
+            <p>
+                <strong>Percentual de uso:</strong>
+                ${percentual}%
+            </p>
+
+            ${
+    identificadorDeck
+        ? `
+            <a href="deck.html?nome=${encodeURIComponent(identificadorDeck)}">
+                Ver detalhes
+            </a>
+        `
+        : `
+            <a href="decks.html">
+                Ver detalhes
+            </a>
+        `
+}
+        `;
+
+        containerDecks.appendChild(card);
+    });
+}
+
+carregarDecksMaisUtilizados();
