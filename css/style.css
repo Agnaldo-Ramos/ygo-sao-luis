@@ -1291,11 +1291,10 @@ PAGINA DO JOGADOR X
 .card-deck-pagina {
     background-color: #111111;
     color: white;
-
     padding: 25px;
-
     border-radius: 12px;
-
+    position: relative;
+    overflow: hidden;
     box-shadow:
         0 4px 12px
         rgba(0, 0, 0, 0.3);
@@ -2282,4 +2281,320 @@ label {
     .noticia-individual h2 {
         font-size: 27px;
     }
+}
+
+/* ========================================
+   PÁGINA DE DECKLIST
+======================================== */
+
+.pagina-decklist {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+
+/* Cabeçalho */
+
+.cabecalho-decklist {
+    margin-bottom: 40px;
+}
+
+.decklist-label {
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.cabecalho-decklist h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.cabecalho-decklist h2 {
+    font-size: 1.3rem;
+    font-weight: normal;
+}
+
+
+/* Seções */
+
+.secao-decklist {
+    margin-bottom: 45px;
+}
+
+.titulo-secao-decklist {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+
+    border-bottom: 2px solid #ddd;
+}
+
+.titulo-secao-decklist h2 {
+    margin: 0;
+}
+
+.titulo-secao-decklist span {
+    font-size: 0.9rem;
+}
+
+
+/* Grade das cartas */
+
+.grade-cartas-decklist {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(110px, 1fr));
+
+    gap: 12px;
+
+    position: relative;
+}
+
+
+/* Carta */
+
+.carta-decklist {
+    display: block;
+
+    width: 100%;
+    max-width: 150px;
+
+    height: auto;
+
+    margin: 0 auto;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    position: relative;
+    z-index: 1;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.carta-decklist:hover {
+    transform: scale(1.8);
+    z-index: 20;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Cores dos textos da decklist */
+
+.cabecalho-decklist {
+    color: #ffffff;
+}
+
+.decklist-label {
+    color: #bfc7d5;
+}
+
+.cabecalho-decklist h1 {
+    color: #ffffff;
+}
+
+.cabecalho-decklist h2 {
+    color: #d6dbe4;
+}
+
+.titulo-secao-decklist h2 {
+    color: #ffffff;
+}
+
+.titulo-secao-decklist span {
+    color: #c7ced9;
+}
+
+.titulo-secao-decklist {
+    border-bottom-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ========================================
+   BOTÃO VER DECKLIST
+======================================== */
+
+.botao-ver-decklist {
+    display: inline-block;
+
+    margin-top: 12px;
+    padding: 9px 18px;
+
+    background-color: #ffffff;
+    color: #0b1f3a;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.botao-ver-decklist:hover {
+    background-color: #d9dde5;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* ========================================
+   TORNEIOS DA DECKLIST
+======================================== */
+
+.decklist-torneios {
+    margin-top: 22px;
+    padding: 16px 20px;
+
+    max-width: 650px;
+
+    background-color: rgba(0, 0, 0, 0.25);
+
+    border-left: 4px solid #c0c0c0;
+    border-radius: 6px;
+}
+
+.decklist-torneios::before {
+    content: "UTILIZADA EM TORNEIOS";
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #c0c0c0;
+
+    font-size: 0.78rem;
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+}
+
+.decklist-torneios .link-torneio-decklist {
+    display: block;
+
+    margin: 6px 0;
+
+    color: #ffffff;
+
+    font-size: 0.95rem;
+    line-height: 1.5;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.decklist-torneios .link-torneio-decklist:hover {
+    color: #c0c0c0;
+
+    transform: translateX(4px);
+}
+
+/* Celular */
+
+@media (max-width: 600px) {
+
+    .pagina-decklist {
+        padding: 25px 12px;
+    }
+
+    .grade-cartas-decklist {
+        grid-template-columns:
+            repeat(auto-fill, minmax(75px, 1fr));
+
+        gap: 7px;
+    }
+
+    .titulo-secao-decklist {
+        align-items: flex-end;
+    }
+
+}
+
+/* ========================================
+   CARTA DE DESTAQUE DOS DECKS
+======================================== */
+
+.carta-destaque-deck {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 72%;
+    height: 100%;
+
+    object-fit: cover;
+
+    /* Ajusta qual região da carta fica visível */
+    object-position: center 38%;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    /* Faz a imagem desaparecer gradualmente para a esquerda */
+    -webkit-mask-image:
+        linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.25) 18%,
+            black 45%,
+            black 100%
+        );
+
+    mask-image:
+        linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.25) 18%,
+            black 45%,
+            black 100%
+        );
+
+    transform: scale(1.15);
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.5s ease;
+}
+
+
+.card-deck-pagina:hover .carta-destaque-deck {
+    opacity: 0.38;
+
+    transform: scale(1.02);
+}
+
+.card-deck-pagina h3,
+.card-deck-pagina p,
+.card-deck-pagina a {
+    position: relative;
+    z-index: 1;
 }
